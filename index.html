@@ -31,12 +31,18 @@
     <model-viewer id="home" src="newscene.glb"></model-viewer>
     <model-viewer id="enemy" src="newscene.glb"></model-viewer>
     <model-viewer id="tower" src="tower.glb"></model-viewer>
+    <model-viewer id="etower" src="tower.glb"></model-viewer>
     <script>
         var tower = document.getElementById("tower");
         tower.style.position = "absolute";
         tower.style.height = "500px";
-        
         tower.style.transformStyle = "preserve-3d"
+        
+        var etower = document.getElementById("etower");
+        etower.style.position = "absolute";
+        etower.style.height = "500px";
+        etower.style.translate = "0px 0px -650px"
+        etower.style.transformStyle = "preserve-3d"
     </script>
 </body>
 </html>
