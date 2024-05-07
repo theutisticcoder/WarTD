@@ -10,26 +10,32 @@
     <style>
         body{
             background: green;
+            perspective: 500px;
         }
         #home{
             position: absolute;
             transform-style: preserve-3d;
             scale: 5 5 5;
             top: 300px;
+            translate: 200px 0px 400px;
         }
-        #tower{
+        #enemy{
             position: absolute;
             transform-style: preserve-3d;
-            scale: 5 15 5;
-            transform: rotateX(-90deg);
+            scale: 5 5 5;
+            top: 300px;
+            translate: 200px 0px -1000px;
         }
+       
     </style>
     <model-viewer id="home" src="newscene.glb"></model-viewer>
+    <model-viewer id="enemy" src="newscene.glb"></model-viewer>
     <model-viewer id="tower" src="tower.glb"></model-viewer>
     <script>
         var tower = document.getElementById("tower");
         tower.style.position = "absolute";
-        tower.style.scale = "5 15 5";
+        tower.style.height = "500px";
+        
         tower.style.transformStyle = "preserve-3d"
     </script>
 </body>
