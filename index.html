@@ -53,7 +53,7 @@
     <p id="eh">Enemy Health</p>
     <p id="yh">Health</p>
     <progress id="enemyhealth" max="100" value="100"></progress>
-    <progress id="you"></progress>
+    <progress id="you" max="100" value="100"></progress>
     <model-viewer id="home" src="newscene.glb"></model-viewer>
     <model-viewer id="enemy" src="newscene.glb"></model-viewer>
     <model-viewer id="tower" src="tower.glb"></model-viewer>
@@ -99,7 +99,7 @@ var firemovee = 1000;
                         firemovee = 0;
                         if(isCollide(fire, tower)){
                             health-=2;
-                            alert("One of your towers has " + health + " health left.")
+                            document.getElementById("health").value-=2;
                         }
                         fire.remove();
                     }
@@ -118,7 +118,7 @@ var firemovee = 1000;
                         firemovee = 0;
                         if(isCollide(fire, tower)){
                             e1health-=2;
-                            alert("An enemy tower has " + e1health + " health left.")
+                            document.getElementById("enemyhealth").value-=2;
                         }
                         fire.remove();
                     }
@@ -145,7 +145,8 @@ var firemovee = 1000;
                         firemove = 0;
                         if(isCollide(fire, etower)){
                             e1health-=dam;
-                            alert("An enemy's tower has " + e1health + " health left.")
+                            document.getElementById("enemyhealth").value-=dam;
+
                         }
                         fire.remove();
                     }
@@ -175,7 +176,7 @@ var firemovee = 1000;
 
                 }
                 if(e.key === "r" && able === true){
-                    document.ondrag = (e)=> {
+                    tower.ondrag = (e)=> {
                         tower.style.left = e.clientX;
                     }
             }
