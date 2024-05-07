@@ -47,7 +47,9 @@
         etower.style.height = "500px";
         etower.style.translate = "0px 0px -650px"
         etower.style.transformStyle = "preserve-3d"
-        var options = ["fire"];
+        var options = ["fire", "wind"];
+        var back = false;
+        var health = 100;
         var t1 = options[Math.floor(Math.random() * options.length)];
         alert("Tower one is " + t1 + ".");
         function isCollide(a, b) {
@@ -58,7 +60,49 @@
                 (a.x > (b.x + b.width))
             );
         }
+        setTiemout(shootenemy, 10000)
         var firemove = 0;
+var firemovee = 1000;
+        function shootenemy() {
+                var fire = new Image(200, 200);
+                fire.src = "fire.png";
+                document.body.appendChild(fire);
+                function firem() {
+                    if(!back){
+                    firemovee += 10;
+                        fire.style.translate = "0px 0px " + firemovee + "px";
+                    if (firemovee < 0) {
+                        requestAnimationFrame(firem);
+                    }
+                    else {
+                        firemovee = 0;
+                        if(isCollide(fire, tower)){
+                            health-=2;
+                            alert("One of your towers has " + health + " health left.")
+                        }
+                        fire.remove();
+                    }
+                }
+                else{
+                    firemovee -= 10;
+                        fire.style.translate = "0px 0px " + firemovee + "px";
+                    
+                    if (firemovee >-1000) {
+                        requestAnimationFrame(firem);
+                    }
+                    else {
+                        firemovee = 0;
+                        if(isCollide(fire, etower)){
+                            e1health-=2;
+                            alert("An enemy tower has " + e1health + " health left.")
+                        }
+                        fire.remove();
+                    }
+                }
+                requestAnimationFrame(firem);
+            }
+        setTimeout(shootenemy, 10000)
+        }
         function shoot(tow, dam) {
             if (tow === "fire") {
                 var fire = new Image(200, 200);
@@ -66,7 +110,6 @@
                 document.body.appendChild(fire);
                 function firem() {
                     firemove -= 10;
-                    fire.style.translate = "0px 0px " + firemove + "px";
                     document.onmousemove = (e)=> {
                         fire.style.translate = e.clientX + "px 0px " + firemove + "px";
                     }
@@ -74,14 +117,20 @@
                         requestAnimationFrame(firem);
                     }
                     else {
+                        firemove = 0;
                         if(isCollide(fire, etower)){
-                            e1health-=damage;
+                            e1health-=dam;
                             alert("An enemy's tower has " + e1health + " health left.")
                         }
                         fire.remove();
                     }
                 }
                 requestAnimationFrame(firem);
+            }
+        }
+        function defend(reb){
+            if(Math.floor(Math.random()* reb) === 1){
+                back = true;
             }
         }
         if (t1 === "fire") {
@@ -99,6 +148,35 @@
                         able = true;
                     }, timeoff);
 
+                }
+                if(e.key === "r" && able === true){
+                    document.ondrag = (e)=> {
+                        tower.style.left = e.clientX;
+                    }
+            }
+        }
+        if (t1 === "air") {
+            var damage = 2;
+            var timeoff = 10000;
+            var poison = false;
+            var able = false;
+            var rebound = 20;
+            setTimeout(() => {
+                able = true;
+            }, timeoff);
+            document.onkeydown = (e) => {
+                if (e.key === " " && able == true) {
+                    able = false;
+                    defend(rebound);
+                    setTimeout(() => {
+                        able = true;
+                    }, timeoff);
+
+                }
+                if(e.key === "r" && able === true){
+                    document.ondrag = (e)=> {
+                        tower.style.left = e.clientX;
+                    }
                 }
             }
         }
