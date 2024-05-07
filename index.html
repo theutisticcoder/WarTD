@@ -66,7 +66,7 @@
                 document.body.appendChild(fire);
                 function firem() {
                     firemove -= 10;
-                    fire.style.translate = "500px 0px " + firemove + "px";
+                    fire.style.translate = "0px 0px " + firemove + "px";
                     document.onmousemove = (e)=> {
                         fire.style.translate = e.clientX + "px 0px " + firemove + "px";
                     }
@@ -75,8 +75,8 @@
                     }
                     else {
                         if(isCollide(fire, etower)){
-                            ehealth-=damage;
-                            alert("An enemy's tower has " + ehealth + " health left.")
+                            e1health-=damage;
+                            alert("An enemy's tower has " + e1health + " health left.")
                         }
                         fire.remove();
                     }
