@@ -84,6 +84,9 @@ var firemovee = 1000;
                     }
                 }
                 else{
+                    setTimeout(()=> {
+                        back = false
+                    }, 5000)
                     firemovee -= 10;
                         fire.style.translate = "0px 0px " + firemovee + "px";
                     
