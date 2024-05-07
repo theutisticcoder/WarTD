@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WarTD</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
 </head>
+
 <body>
     <style>
-        body{
+        body {
             background: green;
             perspective: 500px;
             overflow: hidden;
         }
-        #home{
+
+        #home {
             position: absolute;
             transform-style: preserve-3d;
             scale: 5 5 5;
             top: 300px;
             translate: 500px -20vh 300px;
         }
-        #enemy{
+
+        #enemy {
             position: absolute;
             transform-style: preserve-3d;
             scale: 5 5 5;
             top: 300px;
             translate: 500px 0px -1000px;
         }
-       
     </style>
     <model-viewer id="home" src="newscene.glb"></model-viewer>
     <model-viewer id="enemy" src="newscene.glb"></model-viewer>
@@ -38,7 +41,7 @@
         tower.style.position = "absolute";
         tower.style.height = "500px";
         tower.style.transformStyle = "preserve-3d"
-        
+        var e1health = 100;
         var etower = document.getElementById("etower");
         etower.style.position = "absolute";
         etower.style.height = "500px";
@@ -47,39 +50,59 @@
         var options = ["fire"];
         var t1 = options[Math.floor(Math.random() * options.length)];
         alert("Tower one is " + t1 + ".");
-        var firemove= 0;
-        function shoot(tow){
-            if(tow === "fire"){
+        function isCollide(a, b) {
+            return !(
+                ((a.y + a.height) < (b.y)) ||
+                (a.y > (b.y + b.height)) ||
+                ((a.x + a.width) < b.x) ||
+                (a.x > (b.x + b.width))
+            );
+        }
+        var firemove = 0;
+        function shoot(tow, dam) {
+            if (tow === "fire") {
                 var fire = new Image(200, 200);
                 fire.src = "fire.png";
                 document.body.appendChild(fire);
-                function firem(){
-                    firemove--;
-                    fire.style.translate = "500px 0px "+ firemove + "px";
-                    if(firemove > -1000){
+                function firem() {
+                    firemove -= 10;
+                    fire.style.translate = "500px 0px " + firemove + "px";
+                    document.onmousemove = (e)=> {
+                        fire.style.translate = e.clientX + "px 0px " + firemove + "px";
+                    }
+                    if (firemove > -1000) {
                         requestAnimationFrame(firem);
                     }
-                    else{
+                    else {
+                        if(isCollide(fire, etower)){
+                            ehealth-=damage;
+                            alert("An enemy's tower has " + ehealth + " health left.")
+                        }
                         fire.remove();
                     }
                 }
                 requestAnimationFrame(firem);
             }
         }
-        if(t1 === "fire"){
+        if (t1 === "fire") {
             var damage = 2;
             var timeoff = 10000;
             var poison = false;
             var able = false;
-            setTimeout(()=> {
+            setTimeout(() => {
                 able = true;
             }, timeoff);
-            document.onkeydown = (e)=> {
-                if(e.key === " " && able == true){
-                    shoot(t1);
+            document.onkeydown = (e) => {
+                if (e.key === " " && able == true) {
+                    shoot(t1, damage);
+                    setTimeout(() => {
+                        able = true;
+                    }, timeoff);
+
                 }
             }
         }
     </script>
 </body>
+
 </html>
