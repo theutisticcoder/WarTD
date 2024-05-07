@@ -26,5 +26,12 @@
     </style>
     <model-viewer id="home" src="newscene.glb"></model-viewer>
     <model-viewer id="tower" src="wizard tower.glb"></model-viewer>
+    <script>
+        var tower = document.getElementById("tower");
+        tower.style.position = "absolute";
+        tower.style.transform = "rotateX(-90deg)"
+        tower.style.scale = "5 15 5";
+        tower.style.transformStyle = "preserve-3d"
+    </script>
 </body>
 </html>
