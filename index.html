@@ -31,7 +31,29 @@
             top: 300px;
             translate: 500px 0px -1000px;
         }
+        progress{
+            position: relative;
+            z-index: 10;
+            height: 50px; 
+            width: 50vw;
+        }
+        #yh{
+            position: absolute;
+            z-index: 12;
+            color: black;
+            left: 25vw;
+        }
+        #eh{
+            position: absolute;
+            z-index: 12;
+            color: black;
+            left: 75vw;
+        }
     </style>
+    <p id="eh">Enemy Health</p>
+    <p id="yh">Health</p>
+    <progress id="enemyhealth" max="100" value="100"></progress>
+    <progress id="you"></progress>
     <model-viewer id="home" src="newscene.glb"></model-viewer>
     <model-viewer id="enemy" src="newscene.glb"></model-viewer>
     <model-viewer id="tower" src="tower.glb"></model-viewer>
@@ -40,13 +62,11 @@
         var tower = document.getElementById("tower");
         tower.style.position = "absolute";
         tower.style.height = "500px";
-        tower.style.width = "50px"
         tower.style.transformStyle = "preserve-3d"
         var e1health = 100;
         var etower = document.getElementById("etower");
         etower.style.position = "absolute";
         etower.style.height = "500px";
-        etower.style.width = "50px"
         etower.style.translate = "0px 0px -650px"
         etower.style.transformStyle = "preserve-3d"
         var options = ["fire", "wind"];
@@ -66,6 +86,7 @@ var firemovee = 1000;
         function shootenemy() {
                 var fire = new Image(200, 200);
                 fire.src = "fire.png";
+                fire.style.position = "absolute"
                 document.body.appendChild(fire);
                 function firem() {
                     if(!back){
@@ -95,7 +116,7 @@ var firemovee = 1000;
                     }
                     else {
                         firemovee = 0;
-                        if(isCollide(fire, etower)){
+                        if(isCollide(fire, tower)){
                             e1health-=2;
                             alert("An enemy tower has " + e1health + " health left.")
                         }
@@ -110,7 +131,8 @@ var firemovee = 1000;
             if (tow === "fire") {
                 var fire = new Image(200, 200);
                 fire.src = "fire.png";
-                document.body.appendChild(fire);
+                fire.style.position = "absolute"
+           document.body.appendChild(fire);
                 function firem() {
                     firemove -= 10;
                     document.onmousemove = (e)=> {
@@ -164,7 +186,7 @@ var firemovee = 1000;
             var timeoff = 10000;
             var poison = false;
             var able = false;
-            var rebound = 20;
+            var rebound = 8;
             setTimeout(() => {
                 able = true;
             }, timeoff);
