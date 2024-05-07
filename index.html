@@ -155,6 +155,7 @@ var firemovee = 1000;
                     }
             }
         }
+    }
         if (t1 === "air") {
             var damage = 2;
             var timeoff = 10000;
@@ -174,8 +175,8 @@ var firemovee = 1000;
 
                 }
                 if(e.key === "r" && able === true){
-                    document.ondrag = (e)=> {
-                        tower.style.left = e.clientX;
+                    tower.ondrag = (e)=> {
+                        tower.style.left = e.clientX + "px";
                     }
                 }
             }
