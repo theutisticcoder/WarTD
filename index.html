@@ -44,6 +44,42 @@
         etower.style.height = "500px";
         etower.style.translate = "0px 0px -650px"
         etower.style.transformStyle = "preserve-3d"
+        var options = ["fire"];
+        var t1 = options[Math.floor(Math.random() * options.length)];
+        alert("Tower one is " + t1 + ".");
+        var firemove= 0;
+        function shoot(tow){
+            if(tow === "fire"){
+                var fire = new Image(200, 200);
+                fire.src = "fire.png";
+                document.body.appnedChild(fire);
+                function firem(){
+                    firemove--;
+                    fire.style.translate = "500px 0px "+ firemove + "px";
+                    if(firemove > -1000){
+                        requestAnimationFrame(firem);
+                    }
+                    else{
+                        fire.remove();
+                    }
+                }
+                requestAnimationFrame(firem);
+            }
+        }
+        if(t1 === "fire"){
+            var damage = 2;
+            var timeoff = 10000;
+            var poison = false;
+            var able = false;
+            setTimeout(()=> {
+                able = true;
+            }, timeoff);
+            document.onkeydown = (e)=> {
+                if(e.key === " " && able == true){
+                    shoot(t1);
+                }
+            }
+        }
     </script>
 </body>
 </html>
