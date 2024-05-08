@@ -35,22 +35,22 @@
             position: absolute;
             z-index: 10;
             height: 50px; 
-            width: 50vw;
+            width: 40vw;
         }
         #eh{
             position: absolute;
             z-index: 12;
             color: black;
-            left: 25vw;
+            left: 20vw;
         }
         #yh{
             position: absolute;
             z-index: 12;
             color: black;
-            left: 75vw;
+            left: 60vw;
         }
         #health{
-            left: 50vw; 
+            left: 40vw; 
         }
     </style>
     <p id="eh">Enemy Health</p>
@@ -152,7 +152,8 @@ var firemovee = -1000;
             w.style.position = "absolute";
             function wmove(){
                wx-=20;
-                if(!isCollide(w, etower)){
+                if(isCollide(w, etower) == false){
+                    w.style.translate = "0px 0px "+ wx + "px";
                     requestAnimationFrame(wmove);
                 }
                 else{
