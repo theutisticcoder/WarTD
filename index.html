@@ -171,10 +171,7 @@ var firemovee = -650;
             var damage = 2;
             var timeoff = 10000;
             var poison = false;
-            var able = false;
-            setTimeout(() => {
-                able = true;
-            }, timeoff);
+            var able = true;
             document.onkeydown = (e) => {
                 if (e.key === " " && able == true) {
                     shoot(t1, damage);
