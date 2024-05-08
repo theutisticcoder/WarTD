@@ -64,15 +64,17 @@
     <script>
         var tower = document.getElementById("tower");
         tower.style.position = "absolute";
+        tower.style.width = "50px";
         tower.style.height = "500px";
         tower.style.transformStyle = "preserve-3d"
         var e1health = 100;
         var etower = document.getElementById("etower");
         etower.style.position = "absolute";
+        etower.style.width = "50px";
         etower.style.height = "500px";
         etower.style.translate = "0px 0px -650px"
         etower.style.transformStyle = "preserve-3d"
-        var options = ["fire", "wind"];
+        var options = ["fire", "water"];
         var back = false;
         var health = 100;
         var t1 = options[Math.floor(Math.random() * options.length)];
@@ -85,21 +87,27 @@
         }
         setTimeout(shootenemy, 10000)
         var firemove = 0;
-var firemovee = 1000;
+        var wave = false;
+var firemovee = -1000;
         function shootenemy() {
                 var fire = new Image(200, 200);
                 fire.src = "fire.png";
                 fire.style.position = "absolute"
                 document.body.appendChild(fire);
                 function firem() {
-                    if(!back){
-                    firemovee += 10;
+                   
+                    if (firemovee < 0 && !wave) {
+                        firemovee += 10;
                         fire.style.translate = "0px 0px " + firemovee + "px";
-                    if (firemovee < 0) {
+                        requestAnimationFrame(firem);
+                    }
+                    else if (wave && firemovee > -1000){
+                        firemovee -= 10;
+                        fire.style.translate = "0px 0px " + firemovee + "px";
                         requestAnimationFrame(firem);
                     }
                     else {
-                        firemovee = 0;
+                        firemovee = -1000;
                         if(isCollide(fire, tower)){
                             health-=2;
                             document.getElementById("health").value-=2;
@@ -107,27 +115,6 @@ var firemovee = 1000;
                         fire.remove();
                     }
                 }
-                else{
-                    setTimeout(()=> {
-                        back = false
-                    }, 5000)
-                    firemovee -= 10;
-                        fire.style.translate = "0px 0px " + firemovee + "px";
-                    
-                    if (firemovee >-1000) {
-                        requestAnimationFrame(firem);
-                    }
-                    else {
-                        firemovee = 0;
-                        if(isCollide(fire, tower)){
-                            e1health-=2;
-                            document.getElementById("enemyhealth").value-=2;
-                        }
-                        fire.remove();
-                    }
-                }
-                requestAnimationFrame(firem);
-            }
         setTimeout(shootenemy, 10000)
         }
         function shoot(tow, dam) {
@@ -157,10 +144,24 @@ var firemovee = 1000;
                 requestAnimationFrame(firem);
             }
         }
-        function defend(reb){
-            if(Math.floor(Math.random()* reb) === 1){
-                back = true;
+         var wx = 0;
+        function defend(dam){
+
+            var w = new Image(200, 200);
+            w.src = "water.png";
+            w.style.position = "absolute";
+            function wmove(){
+               wx-=20;
+                if(!isCollide(w, etower)){
+                    requestAnimationFrame(wmove);
+                }
+                else{
+                    wx = 0;
+                    wave = true;           
+                    w.remove();
+                }
             }
+            
         }
         if (t1 === "fire") {
             var damage = 2;
@@ -185,7 +186,7 @@ var firemovee = 1000;
             }
         }
     }
-        if (t1 === "air") {
+        if (t1 === "water") {
             var damage = 2;
             var timeoff = 10000;
             var poison = false;
@@ -197,7 +198,7 @@ var firemovee = 1000;
             document.onkeydown = (e) => {
                 if (e.key === " " && able == true) {
                     able = false;
-                    defend(rebound);
+                    defend(damage);
                     setTimeout(() => {
                         able = true;
                     }, timeoff);
