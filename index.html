@@ -81,6 +81,8 @@
         var t1 = options[Math.floor(Math.random() * options.length)];
         alert("Tower one is " + t1 + ".");
         function isCollide(a, b) {
+            a = a.getBoundingClientRect();
+            b = b.getBoundingClientRect();
             return !(
                 ((a.x + a.width) < b.x) ||
                 (a.x > (b.x + b.width))
@@ -89,7 +91,7 @@
         setTimeout(shootenemy, 10000)
         var firemove = 0;
         var wave = false;
-var firemovee = -1000;
+var firemovee = -650;
         function shootenemy() {
                 var fire = new Image(200, 200);
                 fire.src = "fire.png";
@@ -102,13 +104,13 @@ var firemovee = -1000;
                         fire.style.translate = "0px 0px " + firemovee + "px";
                         requestAnimationFrame(firem);
                     }
-                    else if (wave && firemovee > -1000){
+                    else if (wave && firemovee > -650){
                         firemovee -= 10;
                         fire.style.translate = "0px 0px " + firemovee + "px";
                         requestAnimationFrame(firem);
                     }
                     else {
-                        firemovee = -1000;
+                        firemovee = -650;
                         if(isCollide(fire, tower)){
                             health-=2;
                             document.getElementById("health").value-=2;
@@ -129,7 +131,7 @@ var firemovee = -1000;
                     document.onmousemove = (e)=> {
                         fire.style.translate = e.clientX + "px 0px " + firemove + "px";
                     }
-                    if (firemove > -1000) {
+                    if (firemove > -650) {
                         requestAnimationFrame(firem);
                     }
                     else {
