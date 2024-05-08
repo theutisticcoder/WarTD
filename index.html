@@ -98,15 +98,15 @@ var firemovee = -650;
                 fire.style.position = "absolute"
                 document.body.appendChild(fire);
                 function firem() {
-                   
-                    if (firemovee < 0 && !wave) {
-                        firemovee += 10;
+                    firemovee += 10;
                         fire.style.translate = "0px 0px " + firemovee + "px";
+                    if (firemovee < 0 && !wave) {
+                       
                         requestAnimationFrame(firem);
                     }
                     else if (wave && firemovee > -650){
                         firemovee -= 10;
-                        fire.style.translate = "0px 0px " + firemovee + "px";
+                        fire.style.translate = (50*Math.floor(Math.random()* 5))+"px 0px " + firemovee + "px";
                         requestAnimationFrame(firem);
                     }
                     else {
