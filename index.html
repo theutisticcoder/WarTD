@@ -169,6 +169,7 @@
             w = new Image(200, 200);
             w.src = "water.png";
             w.style.position = "absolute";
+            document.body.appendChild(wave);
             function wmove() {
                 wx -= 20;
                 if (isCollide(w, efire) == false) {
