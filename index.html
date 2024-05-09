@@ -104,10 +104,10 @@
             efire.style.position = "absolute"
             document.body.appendChild(efire);
             function firem() {
-                firemovee += 10;
-                efire.style.translate = "0px 0px " + firemovee + "px";
                 if (firemovee < 0 && !wave) {
 
+                    firemovee += 10;
+                efire.style.translate = "0px 0px " + firemovee + "px";
                     requestAnimationFrame(firem);
                 }
                 else if (wave && firemovee > -650) {
@@ -123,10 +123,10 @@
                             document.getElementById("health").value -= 2;
                         }
                     }
-                    else{
+                    else {
                         firemovee = -650;
-                        if(isCollide(efire, etower)){
-                            document.getElementById("enemyhealth").value-=2;
+                        if (isCollide(efire, etower)) {
+                            document.getElementById("enemyhealth").value -= 2;
                         }
                     }
 
@@ -173,14 +173,20 @@
             function wmove() {
                 wx -= 20;
                 w.style.translate = "0px 0px " + wx + "px";
-                if (isCollide(w, efire) == false) {
+                if (wx > -650) {
+                    if (isCollide(w, efire)) {
+                        efire.remove()
+                        wave = true;
+
+                    }
                     requestAnimationFrame(wmove);
                 }
-                else {
+                else{
+                    if(isCollide(w, etower)) document.getElementById("enemyhealth").value-=dam;
                     wx = 0;
-                    wave = true;
                     w.remove();
                 }
+
             }
 
         }
