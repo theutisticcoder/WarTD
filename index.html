@@ -31,26 +31,30 @@
             top: 300px;
             translate: 500px 0px -1000px;
         }
-        progress{
+
+        progress {
             position: absolute;
             z-index: 10;
-            height: 50px; 
+            height: 50px;
             width: 40vw;
         }
-        #eh{
+
+        #eh {
             position: absolute;
             z-index: 12;
             color: black;
             left: 20vw;
         }
-        #yh{
+
+        #yh {
             position: absolute;
             z-index: 12;
             color: black;
             left: 60vw;
         }
-        #health{
-            left: 40vw; 
+
+        #health {
+            left: 40vw;
         }
     </style>
     <p id="eh">Enemy Health</p>
@@ -62,6 +66,7 @@
     <model-viewer id="tower" src="tower.glb"></model-viewer>
     <model-viewer id="etower" src="tower.glb"></model-viewer>
     <script>
+        var w;
         var tower = document.getElementById("tower");
         tower.style.position = "absolute";
         tower.style.width = "50px";
@@ -91,44 +96,55 @@
         setTimeout(shootenemy, 10000)
         var firemove = 0;
         var wave = false;
-var firemovee = -650;
+        var firemovee = -650;
+        var efire;
         function shootenemy() {
-                var fire = new Image(200, 200);
+            efire = new Image(200, 200);
+            efire.src = "fire.png";
+            efire.style.position = "absolute"
+            document.body.appendChild(efire);
+            function firem() {
+                firemovee += 10;
+                efire.style.translate = "0px 0px " + firemovee + "px";
+                if (firemovee < 0 && !wave) {
+
+                    requestAnimationFrame(firem);
+                }
+                else if (wave && firemovee > -650) {
+                    firemovee -= 10;
+                    efire.style.translate = (50 * Math.floor(Math.random() * 5)) + "px 0px " + firemovee + "px";
+                    requestAnimationFrame(firem);
+                }
+                else {
+                    if (!wave) {
+                        firemovee = -650;
+                        if (isCollide(efire, tower)) {
+                            health -= 2;
+                            document.getElementById("health").value -= 2;
+                        }
+                    }
+                    else{
+                        firemovee = -650;
+                        if(isCollide(efire, etower)){
+                            document.getElementById("enemyhealth").value-=2;
+                        }
+                    }
+
+                    efire.remove();
+                }
+            }
+            setTimeout(shootenemy, 10000)
+        }
+        var fire;
+        function shoot(tow, dam) {
+            if (tow === "fire") {
+                fire = new Image(200, 200);
                 fire.src = "fire.png";
                 fire.style.position = "absolute"
                 document.body.appendChild(fire);
                 function firem() {
-                    firemovee += 10;
-                        fire.style.translate = "0px 0px " + firemovee + "px";
-                    if (firemovee < 0 && !wave) {
-                       
-                        requestAnimationFrame(firem);
-                    }
-                    else if (wave && firemovee > -650){
-                        firemovee -= 10;
-                        fire.style.translate = (50*Math.floor(Math.random()* 5))+"px 0px " + firemovee + "px";
-                        requestAnimationFrame(firem);
-                    }
-                    else {
-                        firemovee = -650;
-                        if(isCollide(fire, tower)){
-                            health-=2;
-                            document.getElementById("health").value-=2;
-                        }
-                        fire.remove();
-                    }
-                }
-        setTimeout(shootenemy, 10000)
-        }
-        function shoot(tow, dam) {
-            if (tow === "fire") {
-                var fire = new Image(200, 200);
-                fire.src = "fire.png";
-                fire.style.position = "absolute"
-           document.body.appendChild(fire);
-                function firem() {
                     firemove -= 10;
-                    document.onmousemove = (e)=> {
+                    document.onmousemove = (e) => {
                         fire.style.translate = e.clientX + "px 0px " + firemove + "px";
                     }
                     if (firemove > -650) {
@@ -136,9 +152,9 @@ var firemovee = -650;
                     }
                     else {
                         firemove = 0;
-                        if(isCollide(fire, etower)){
-                            e1health-=dam;
-                            document.getElementById("enemyhealth").value-=dam;
+                        if (isCollide(fire, etower)) {
+                            e1health -= dam;
+                            document.getElementById("enemyhealth").value -= dam;
 
                         }
                         fire.remove();
@@ -147,25 +163,25 @@ var firemovee = -650;
                 requestAnimationFrame(firem);
             }
         }
-         var wx = 0;
-        function defend(dam){
+        var wx = 0;
+        function defend(dam) {
 
-            var w = new Image(200, 200);
+            w = new Image(200, 200);
             w.src = "water.png";
             w.style.position = "absolute";
-            function wmove(){
-               wx-=20;
-                if(isCollide(w, etower) == false){
-                    w.style.translate = "0px 0px "+ wx + "px";
+            function wmove() {
+                wx -= 20;
+                if (isCollide(w, efire) == false) {
+                    w.style.translate = "0px 0px " + wx + "px";
                     requestAnimationFrame(wmove);
                 }
-                else{
+                else {
                     wx = 0;
-                    wave = true;           
+                    wave = true;
                     w.remove();
                 }
             }
-            
+
         }
         if (t1 === "fire") {
             var damage = 2;
@@ -180,13 +196,13 @@ var firemovee = -650;
                     }, timeoff);
 
                 }
-                if(e.key === "r" && able === true){
-                    tower.ondrag = (e)=> {
+                if (e.key === "r" && able === true) {
+                    tower.ondrag = (e) => {
                         tower.style.left = e.clientX;
                     }
+                }
             }
         }
-    }
         if (t1 === "water") {
             var damage = 2;
             var timeoff = 10000;
@@ -205,8 +221,8 @@ var firemovee = -650;
                     }, timeoff);
 
                 }
-                if(e.key === "r" && able === true){
-                    tower.ondrag = (e)=> {
+                if (e.key === "r" && able === true) {
+                    tower.ondrag = (e) => {
                         tower.style.left = e.clientX + "px";
                     }
                 }
