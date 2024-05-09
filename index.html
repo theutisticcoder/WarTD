@@ -203,10 +203,14 @@
                     }, timeoff);
 
                 }
-                if (e.key === "r" && able === true) {
+                if (e.key === "r" && able == true) {
                     tower.ondrag = (e) => {
                         tower.style.left = e.clientX;
                     }
+                    setTimeout(() => {
+                        able = true;
+                    }, timeoff);
+
                 }
             }
         }
@@ -228,10 +232,14 @@
                     }, timeoff);
 
                 }
-                if (e.key === "r" && able === true) {
+                if (e.key === "r" && able == true) {
                     tower.ondrag = (e) => {
                         tower.style.left = e.clientX + "px";
                     }
+                    setTimeout(() => {
+                        able = true;
+                    }, timeoff);
+
                 }
             }
         }
