@@ -169,11 +169,11 @@
             w = new Image(200, 200);
             w.src = "water.png";
             w.style.position = "absolute";
-            document.body.appendChild(wave);
+            document.body.appendChild(w);
             function wmove() {
                 wx -= 20;
+                w.style.translate = "0px 0px " + wx + "px";
                 if (isCollide(w, efire) == false) {
-                    w.style.translate = "0px 0px " + wx + "px";
                     requestAnimationFrame(wmove);
                 }
                 else {
