@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WarTD</title>
@@ -56,6 +57,7 @@
         #health {
             left: 40vw;
         }
+
         #cd {
             position: absolute;
             color: black;
@@ -69,13 +71,12 @@
             width: 100vw;
             left: 0vw;
         }
-        .tower{
+
+        .tower {
             z-index: 0;
             scale: 3 3 3;
             position: absolute;
             transform-style: preserve-3d;
-        }
-        #tower{
         }
     </style>
     <p id="eh">Enemy Health</p>
@@ -89,6 +90,8 @@
     <model-viewer id="tower" class="tower" src="tower.glb"></model-viewer>
     <model-viewer id="etower" class="tower" src="Fire.glb"></model-viewer>
     <script>
+          var dama = 2;
+        var dur = 20000
         var w;
         var exp = 0;
         var tower = document.getElementById("tower");
@@ -170,7 +173,12 @@
                         if (isCollide(fire, etower)) {
                             e1health -= dam;
                             document.getElementById("enemyhealth").value -= dam;
-
+                            hits++;
+                            if(hits === 10){
+                                hits = 0;
+                                upgrade();
+                            }
+                        
                         }
                         fire.remove();
 
@@ -178,24 +186,24 @@
                 }
                 requestAnimationFrame(firem);
             }
-            if(document.activeElement === tow2){
+            if (document.activeElement === tow2) {
                 setTimeout(shoot, 10000);
             }
         }
-        var cd = 0
-        function cooldown(){
+        var cd = 10
+        function cooldown() {
             able = false;
-            if(cd > 0){
+            if (cd > 0) {
                 cd--;
                 document.getElementById("cldwn").value = cd;
                 setTimeout(cooldown, 1000);
             }
-            else{
+            else {
                 cd = 10;
                 document.getElementById("cldwn").value = cd;
                 able = true;
             }
-            
+
         }
         var invincible = false;
         function fdef() {
@@ -203,9 +211,9 @@
             invincible = true;
             setTimeout(() => {
                 invincible = false
-            }, 20000);
+            }, dur);
         }
-
+var hits = 0;
         function shoot(tow, dam) {
             if (tow === "fire") {
                 fire = new Image(200, 200);
@@ -238,7 +246,7 @@
                                 }, timeoff);
                                 document.onkeydown = (e) => {
                                     if (e.key === "d" && able == true) {
-                                       cooldown();
+                                        cooldown();
                                         defend(time);
                                         setTimeout(() => {
                                             able = true;
@@ -330,6 +338,11 @@
                     else {
                         firemove = 0;
                         if (isCollide(fire, etower)) {
+                            hits++;
+                            if(hits === 10){
+                                hits = 0;
+                                upgrade();
+                            }
                             e1health -= dam;
                             document.getElementById("enemyhealth").value -= dam;
 
@@ -358,9 +371,13 @@
                 else {
                     watermove = 0;
                     if (isCollide(fire, etower)) {
-                        e1health-=2;
-                        document.getElementById("enemyhealth").value-=2;
-
+                        e1health -= dama;
+                        document.getElementById("enemyhealth").value -= dama;
+                        hits++;
+                            if(hits === 10){
+                                hits = 0;
+                                upgrade();
+                            }
                     }
                     fire.remove();
                 }
@@ -383,12 +400,18 @@
                 else {
                     watermove = 0;
                     if (isCollide(fire, etower)) {
-                        e1health-=2;
-                        document.getElementById("enemyhealth").value-=2;
-                        if (document.activeElement === tower) {
+                        e1health -= dama;
+                        document.getElementById("enemyhealth").value -= dama;
+                        hits++;
+                            if(hits === 10){
+                                hits = 0;
+                                upgrade();
+                            }
+                        
+                    }
+                    if (document.activeElement === tower) {
                             setTimeout(attack2, 20000)
                         }
-                    }
                     fire.remove();
                 }
             }
@@ -421,7 +444,7 @@
             document.onkeydown = (e) => {
                 if (e.key === " " && able == true) {
                     cooldown();
-                    shoot(t1, damage);
+                    shoot(t1, dama);
                     setTimeout(() => {
                         able = true;
                     }, timeoff);
@@ -449,7 +472,7 @@
         }
         if (t1 === "water") {
             tower.src = "Water.glb"
-            var time = 20000;
+            dur = 20000;
             var timeoff = 10000;
             var poison = false;
             var able = false;
@@ -459,7 +482,7 @@
             document.onkeydown = (e) => {
                 if (e.key === "d" && able == true) {
                     cooldown();
-                    defend(time);
+                    defend(dur);
                     setTimeout(() => {
                         able = true;
                     }, timeoff);
@@ -482,6 +505,32 @@
                     }, timeoff);
 
                 }
+            }
+        }
+    
+        async function upgrade() {
+            const { value: up } = await Swal.fire({
+                title: "Select Upgrade",
+                input: "radio",
+            inputOptions: {"cooldown": "Cooldown Time", "damage": "Damage Amount", "duration": "Defense Duration"}
+            });
+            if(up === "cooldown"){
+                if(cd > 5){
+                    cd--;
+                }
+                else{
+                    const { value: up } = await Swal.fire({
+                title: "Select upgrade that is not maxed out.",
+                input: "radio",
+            inputOptions: {"damage": "Damage Amount", "duration": "Defense Duration"}
+            });
+                }
+            }
+            else if(up === "damage"){
+                dama++;
+            }
+            else{
+                dur += 3000;
             }
         }
     </script>
