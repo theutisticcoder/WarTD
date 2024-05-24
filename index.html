@@ -76,7 +76,6 @@
             transform-style: preserve-3d;
         }
         #tower{
-            translate: 0px 0px 0px;
         }
     </style>
     <p id="eh">Enemy Health</p>
@@ -96,7 +95,7 @@
         tower.style.position = "absolute";
         tower.style.width = "50px";
         tower.style.height = "500px";
-        tower.style.translate = "0px 0px 0px"
+        tower.style.translate = "0px 0px -100px"
         tower.style.transformStyle = "preserve-3d"
         var e1health = 100;
         var etower = document.getElementById("etower");
@@ -131,7 +130,7 @@
             document.body.appendChild(efire);
             firem();
             function firem() {
-                if (firemovee <= 0 && wave == false) {
+                if (firemovee < -100 && wave == false) {
                     console.log(isCollide(efire, tower));
                     firemovee++;
                     efire.style.translate = "0px 0px " + firemovee + "px";
@@ -225,7 +224,7 @@
                             tow2.style.position = "absolute";
                             tow2.style.width = "50px";
                             tow2.style.height = "500px";
-                            tow2.style.translate = "500px 0px 0px"
+                            tow2.style.translate = "500px 0px -100px"
                             tow2.style.transformStyle = "preserve-3d"
                             tow2.src = "Water.glb";
                             document.body.appendChild(tow2);
@@ -277,7 +276,7 @@
                             tow2.style.position = "absolute";
                             tow2.style.width = "50px";
                             tow2.style.height = "500px";
-                            tow2.style.translate = "500px 0px 0px"
+                            tow2.style.translate = "500px 0px -100px"
                             tow2.style.transformStyle = "preserve-3d"
                             tow2.src = "Fire.glb";
                             document.body.appendChild(tow2);
