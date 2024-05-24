@@ -135,53 +135,7 @@
                 function firem() {
                     firemove -= 10;
                     exp += 10;
-                    if (exp === 1000000) {
-                        exp = 0;
-                        alert("You got a new Tower! Click the tower you want to use currently to control it!");
-                        if (t1 === "fire") {
-                            t2 = water;
-                            var tow2 = tower.cloneNode(true);
-                            tow2.style.position = "absolute";
-                            tow2.style.width = "50px";
-                            tow2.style.height = "500px";
-                            tow2.style.translate = "500px 0px 0px"
-                            tow2.style.transformStyle = "preserve-3d"
-                            tow2.src = "Water.glb";
-                            documentbody.appendChild(tow2);
-                            if (document.activeElement === tower) {
-                                
-                                setTimeout(shoot2, 10000, tow, dam);
-                            }
-                            else if(document.activeElement === tow2){
-                                var damage = 2;
-            var timeoff = 10000;
-            var poison = false;
-            var able = true;
-            document.onkeydown = (e) => {
-                if (e.key === " " && able == true) {
-                    able = false;
-                    shoot(t1, damage);
-                    setTimeout(() => {
-                        able = true;
-                    }, timeoff);
-
-                }
-                if (e.key === "r" && able == true) {
-                    able = false;
-                    tower.ondrag = (e) => {
-                        tower.style.left = e.clientX;
-                    }
-                    setTimeout(() => {
-                        able = true;
-                    }, timeoff);
-
-                }
-            }
-            setTimeout(defend2, 10000, 20000);
-            setTimeout(attack2, 20000);
-                            }
-                        }
-                    }
+                  
                     document.onmousemove = (e) => {
                         fire.style.translate = e.clientX + "px 0px " + firemove + "px";
                     }
