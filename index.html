@@ -106,17 +106,17 @@
             document.body.appendChild(efire);
             function firem() {
                 if (firemovee <= 0 && wave == false) {
-
+                    console.log(isCollide(efire, tower));
                     firemovee++;
-                efire.style.translate = "0px 0px " + firemovee + "px";
+                    efire.style.translate = "0px 0px " + firemovee + "px";
                     requestAnimationFrame(firem);
                 }
-                else if(wave == false) {
-                        firemovee = -650;
-                        if (isCollide(efire, tower)) {
-                            health -= 2;
-                            document.getElementById("health").value -= 2;
-                            efire.remove();
+                else if (wave == false) {
+                    firemovee = -650;
+                    if (isCollide(efire, tower)) {
+                        health -= 2;
+                        document.getElementById("health").value -= 2;
+                        efire.remove();
                     }
 
                 }
@@ -154,37 +154,37 @@
         var watermove = 0;
         var wx = 0;
         function attack() {
-                fire = new Image(200, 200);
-                fire.src = "water.png";
-                fire.style.position = "absolute"
-                document.body.appendChild(fire);
-                function firem() {
-                    watermove -= 10;
-                    document.onmousemove = (e) => {
-                        fire.style.translate = e.clientX + "px 0px " + watermove + "px";
-                    }
-                    if (watermove > -650) {
-                        requestAnimationFrame(firem);
-                    }
-                    else {
-                        watermove = 0;
-                        if (isCollide(fire, etower)) {
-                            e1health--;
-                            document.getElementById("enemyhealth").value--;
-
-                        }
-                        fire.remove();
-                    }
+            fire = new Image(200, 200);
+            fire.src = "water.png";
+            fire.style.position = "absolute"
+            document.body.appendChild(fire);
+            function firem() {
+                watermove -= 10;
+                document.onmousemove = (e) => {
+                    fire.style.translate = e.clientX + "px 0px " + watermove + "px";
                 }
-                requestAnimationFrame(firem);
+                if (watermove > -650) {
+                    requestAnimationFrame(firem);
+                }
+                else {
+                    watermove = 0;
+                    if (isCollide(fire, etower)) {
+                        e1health--;
+                        document.getElementById("enemyhealth").value--;
+
+                    }
+                    fire.remove();
+                }
             }
+            requestAnimationFrame(firem);
+        }
         function defend(tim) {
             wave = true;
-            alert("Enemy stunned for " + tim/1000 + " seconds.")
-            setTimeout(()=> {
+            alert("Enemy stunned for " + tim / 1000 + " seconds.")
+            setTimeout(() => {
                 wave = false;
-            },tim)
-           
+            }, tim)
+
         }
         if (t1 === "fire") {
             var damage = 2;
@@ -194,6 +194,7 @@
             var able = true;
             document.onkeydown = (e) => {
                 if (e.key === " " && able == true) {
+                    able = false;
                     shoot(t1, damage);
                     setTimeout(() => {
                         able = true;
@@ -201,6 +202,7 @@
 
                 }
                 if (e.key === "r" && able == true) {
+                    able = false;
                     tower.ondrag = (e) => {
                         tower.style.left = e.clientX;
                     }
