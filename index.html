@@ -516,6 +516,8 @@ var hits = 0;
             });
             if(up === "cooldown"){
                 if(cd > 5){
+                    document.getElementById("cldwn").max = cd;
+                    document.getElementById("cldwn").value = cd;
                     cd--;
                 }
                 else{
