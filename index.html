@@ -523,7 +523,8 @@ var hits = 0;
             inputOptions: {"cooldown": "Cooldown Time", "damage": "Damage Amount", "duration": "Defense Duration"}
             });
             if(up === "cooldown"){
-                if(cd === 5){
+                
+                if(document.getElementById("cldwn").max > 5){
                     document.getElementById("cldwn").max = cd;
                     document.getElementById("cldwn").value = cd;
                     cd--;
