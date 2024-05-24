@@ -105,28 +105,20 @@
             efire.style.position = "absolute"
             document.body.appendChild(efire);
             function firem() {
-                if (firemovee < 0 && wave == false) {
+                if (firemovee <= 0 && wave == false) {
 
-                    firemovee += 10;
+                    firemovee++;
                 efire.style.translate = "0px 0px " + firemovee + "px";
                     requestAnimationFrame(firem);
                 }
                 else if(wave == false) {
-                    if (!wave) {
                         firemovee = -650;
                         if (isCollide(efire, tower)) {
                             health -= 2;
                             document.getElementById("health").value -= 2;
-                        }
-                    }
-                    else {
-                        firemovee = -650;
-                        if (isCollide(efire, etower)) {
-                            document.getElementById("enemyhealth").value -= 2;
-                        }
+                            efire.remove();
                     }
 
-                    efire.remove();
                 }
             }
             setTimeout(shootenemy, etimeoff)
@@ -205,7 +197,7 @@
             document.onkeydown = (e) => {
                 if (e.key === " " && able == true) {
                     able = false;
-                    defend(damage);
+                    defend(time);
                     setTimeout(() => {
                         able = true;
                     }, timeoff);
