@@ -70,6 +70,9 @@
             width: 100vw;
             left: 0vw;
         }
+        .tower{
+            scale: 5 5 5;
+        }
     </style>
     <p id="eh">Enemy Health</p>
     <p id="yh">Health</p>
@@ -79,8 +82,8 @@
     <progress id="cldwn" max="10" value="10"></progress>
     <model-viewer id="home" src="newscene.glb"></model-viewer>
     <model-viewer id="enemy" src="newscene.glb"></model-viewer>
-    <model-viewer id="tower" src="tower.glb"></model-viewer>
-    <model-viewer id="etower" src="Fire.glb"></model-viewer>
+    <model-viewer id="tower" class="tower" src="tower.glb"></model-viewer>
+    <model-viewer id="etower" class="tower" src="Fire.glb"></model-viewer>
     <script>
         var w;
         var exp = 0;
