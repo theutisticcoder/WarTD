@@ -56,11 +56,24 @@
         #health {
             left: 40vw;
         }
+        #cd {
+            position: absolute;
+            z-index: 12;
+            color: black;
+            left: 40vw;
+        }
+
+        #health {
+            width: 100vw;
+            left: 0vw;
+        }
     </style>
     <p id="eh">Enemy Health</p>
     <p id="yh">Health</p>
     <progress id="enemyhealth" max="100" value="100"></progress>
     <progress id="health" max="100" value="100"></progress>
+    <p id="cd">Cooldown</p>
+    <progress id="cldwn" max="10" value="0"></progress>
     <model-viewer id="home" src="newscene.glb"></model-viewer>
     <model-viewer id="enemy" src="newscene.glb"></model-viewer>
     <model-viewer id="tower" src="tower.glb"></model-viewer>
@@ -159,6 +172,20 @@
                 setTimeout(shoot, 10000);
             }
         }
+        var cd = 0
+        function cooldown(){
+            if(cd > 0){
+                cd--;
+                document.getElementById("cldwn").value = cd;
+                setTimeout(cooldown, 1000);
+            }
+            else{
+                cd = 10;
+                document.getElementById("cldwn").value = cd;
+                able = true;
+            }
+            
+        }
         var invincible = false;
         function fdef() {
             alert("FireWall Activated, you are invincible for 20 seconds.")
@@ -200,7 +227,7 @@
                                 }, timeoff);
                                 document.onkeydown = (e) => {
                                     if (e.key === " " && able == true) {
-                                        able = false;
+                                       cooldown();
                                         defend(time);
                                         setTimeout(() => {
                                             able = true;
@@ -208,7 +235,7 @@
 
                                     }
                                     if (e.key === "a" && able == true) {
-                                        able = false;
+                                        cooldown();
                                         attack();
                                         setTimeout(() => {
                                             able = true;
@@ -249,7 +276,7 @@
                                 var able = true;
                                 document.onkeydown = (e) => {
                                     if (e.key === "a" && able == true) {
-                                        able = false;
+                                        cooldown();
                                         shoot(t1, damage);
                                         setTimeout(() => {
                                             able = true;
@@ -257,7 +284,7 @@
 
                                     }
                                     if (e.key === " " && able == true) {
-                                        able = false;
+                                        cooldown();
                                         fdef();
                                         setTimeout(() => {
                                             able = true;
@@ -265,7 +292,7 @@
 
                                     }
                                     if (e.key === "r" && able == true) {
-                                        able = false;
+                                        cooldown();
                                         tower.ondrag = (e) => {
                                             tower.style.left = e.clientX;
                                         }
@@ -382,7 +409,7 @@
             var able = true;
             document.onkeydown = (e) => {
                 if (e.key === "a" && able == true) {
-                    able = false;
+                    cooldown();
                     shoot(t1, damage);
                     setTimeout(() => {
                         able = true;
@@ -390,7 +417,7 @@
 
                 }
                 if (e.key === " " && able == true) {
-                    able = false;
+                    cooldown();
                     fdef();
                     setTimeout(() => {
                         able = true;
@@ -398,7 +425,7 @@
 
                 }
                 if (e.key === "r" && able == true) {
-                    able = false;
+                    cooldown();
                     tower.ondrag = (e) => {
                         tower.style.left = e.clientX;
                     }
@@ -420,7 +447,7 @@
             }, timeoff);
             document.onkeydown = (e) => {
                 if (e.key === " " && able == true) {
-                    able = false;
+                    cooldown();
                     defend(time);
                     setTimeout(() => {
                         able = true;
@@ -428,7 +455,7 @@
 
                 }
                 if (e.key === "a" && able == true) {
-                    able = false;
+                    cooldown();
                     attack();
                     setTimeout(() => {
                         able = true;
