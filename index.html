@@ -350,8 +350,8 @@
                 else {
                     watermove = 0;
                     if (isCollide(fire, etower)) {
-                        e1health--;
-                        document.getElementById("enemyhealth").value--;
+                        e1health-=2;
+                        document.getElementById("enemyhealth").value-=2;
 
                     }
                     fire.remove();
@@ -375,8 +375,8 @@
                 else {
                     watermove = 0;
                     if (isCollide(fire, etower)) {
-                        e1health--;
-                        document.getElementById("enemyhealth").value--;
+                        e1health-=2;
+                        document.getElementById("enemyhealth").value-=2;
                         if (document.activeElement === tower) {
                             setTimeout(attack2, 20000)
                         }
