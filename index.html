@@ -151,10 +151,36 @@
                 requestAnimationFrame(firem);
             }
         }
+        var watermove = 0;
         var wx = 0;
+        function attack() {
+                fire = new Image(200, 200);
+                fire.src = "water.png";
+                fire.style.position = "absolute"
+                document.body.appendChild(fire);
+                function firem() {
+                    watermove -= 10;
+                    document.onmousemove = (e) => {
+                        fire.style.translate = e.clientX + "px 0px " + watermove + "px";
+                    }
+                    if (watermove > -650) {
+                        requestAnimationFrame(firem);
+                    }
+                    else {
+                        watermove = 0;
+                        if (isCollide(fire, etower)) {
+                            e1health--;
+                            document.getElementById("enemyhealth").value--;
+
+                        }
+                        fire.remove();
+                    }
+                }
+                requestAnimationFrame(firem);
+            }
         function defend(tim) {
             wave = true;
-            alert("Enemy stunned for " + tim + " seconds.")
+            alert("Enemy stunned for " + tim/1000 + " seconds.")
             setTimeout(()=> {
                 wave = false;
             },tim)
@@ -198,6 +224,14 @@
                 if (e.key === " " && able == true) {
                     able = false;
                     defend(time);
+                    setTimeout(() => {
+                        able = true;
+                    }, timeoff);
+
+                }
+                if (e.key === "a" && able == true) {
+                    able = false;
+                    attack();
                     setTimeout(() => {
                         able = true;
                     }, timeoff);
