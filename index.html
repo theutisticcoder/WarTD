@@ -64,7 +64,7 @@
     <model-viewer id="home" src="newscene.glb"></model-viewer>
     <model-viewer id="enemy" src="newscene.glb"></model-viewer>
     <model-viewer id="tower" src="tower.glb"></model-viewer>
-    <model-viewer id="etower" src="tower.glb"></model-viewer>
+    <model-viewer id="etower" src="Fire.glb"></model-viewer>
     <script>
         var w;
         var tower = document.getElementById("tower");
@@ -77,6 +77,7 @@
         var etower = document.getElementById("etower");
         etower.style.position = "absolute";
         etower.style.width = "50px";
+        var etimeoff = 10000
         etower.style.height = "500px";
         etower.style.translate = "0px 0px -650px"
         etower.style.transformStyle = "preserve-3d"
@@ -93,7 +94,7 @@
                 (a.x > (b.x + b.width))
             );
         }
-        setTimeout(shootenemy, 10000)
+        setTimeout(shootenemy, etimeoff)
         var firemove = 0;
         var wave = false;
         var firemovee = -650;
@@ -104,18 +105,13 @@
             efire.style.position = "absolute"
             document.body.appendChild(efire);
             function firem() {
-                if (firemovee < 0 && !wave) {
+                if (firemovee < 0 && wave == false) {
 
                     firemovee += 10;
                 efire.style.translate = "0px 0px " + firemovee + "px";
                     requestAnimationFrame(firem);
                 }
-                else if (wave && firemovee > -650) {
-                    firemovee -= 10;
-                    efire.style.translate = (50 * Math.floor(Math.random() * 5)) + "px 0px " + firemovee + "px";
-                    requestAnimationFrame(firem);
-                }
-                else {
+                else if(wave == false) {
                     if (!wave) {
                         firemovee = -650;
                         if (isCollide(efire, tower)) {
@@ -133,7 +129,7 @@
                     efire.remove();
                 }
             }
-            setTimeout(shootenemy, 10000)
+            setTimeout(shootenemy, etimeoff)
         }
         var fire;
         function shoot(tow, dam) {
@@ -164,31 +160,13 @@
             }
         }
         var wx = 0;
-        function defend(dam) {
-
-            w = new Image(200, 200);
-            w.src = "water.png";
-            w.style.position = "absolute";
-            document.body.appendChild(w);
-            function wmove() {
-                wx -= 20;
-                w.style.translate = "0px 0px " + wx + "px";
-                if (wx > -650) {
-                    if (isCollide(w, efire)) {
-                        efire.remove()
-                        wave = true;
-
-                    }
-                    requestAnimationFrame(wmove);
-                }
-                else{
-                    if(isCollide(w, etower)) document.getElementById("enemyhealth").value-=dam;
-                    wx = 0;
-                    w.remove();
-                }
-
-            }
-
+        function defend(tim) {
+            wave = true;
+            alert("Enemy stunned for " + tim + " seconds.")
+            setTimeout(()=> {
+                wave = false;
+            },tim)
+           
         }
         if (t1 === "fire") {
             var damage = 2;
@@ -217,11 +195,10 @@
         }
         if (t1 === "water") {
             tower.src = "Water.glb"
-            var damage = 2;
+            var time = 20000;
             var timeoff = 10000;
             var poison = false;
             var able = false;
-            var rebound = 8;
             setTimeout(() => {
                 able = true;
             }, timeoff);
