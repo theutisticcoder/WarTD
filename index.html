@@ -212,11 +212,14 @@
         }
         var invincible = false;
         function fdef() {
-            alert("FireWall Activated, you are invincible for 20 seconds.")
+            if(document.activeElement.src === "Fire.glb"){
+                alert("FireWall Activated, you are invincible for 20 seconds.")
             invincible = true;
             setTimeout(() => {
                 invincible = false
             }, dur);
+            }
+            
         }
 var hits = 0;
         function shoot(tow, dam) {
@@ -279,8 +282,8 @@ var hits = 0;
                                 setTimeout(shoot, 10000, t1, 2);
                             }
                             else {
-                                setTimeout(defend2, 10000, time)
-                                setTimeout(attack2, 10000)
+                                setTimeout(defend2, 10000, dur)
+                                setTimeout(attack2, 20000)
                             }
                         }
                         else if (t1 === "water") {
@@ -326,8 +329,8 @@ var hits = 0;
 
                                     }
                                 }
-                                setTimeout(defend2, 10000, 20000);
-                                setTimeout(attack2, 200000)
+                                setTimeout(defend2, 10000, dur);
+                                setTimeout(attack2, 20000)
                             }
                             else {
                                 setTimeout(shoot2, 10000, t2, damage)
@@ -437,7 +440,7 @@ var hits = 0;
                 wave = false;
             }, tim)
             if (document.activeElement === tower) {
-                setTimeout(defend2, 20000, tim)
+                setTimeout(defend2, 20000, dur)
             }
         }
         if (t1 === "fire") {
