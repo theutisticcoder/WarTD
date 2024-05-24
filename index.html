@@ -520,18 +520,14 @@ var hits = 0;
             inputOptions: {"cooldown": "Cooldown Time", "damage": "Damage Amount", "duration": "Defense Duration"}
             });
             if(up === "cooldown"){
-                if(cd > 5){
+                if(cd === 5){
                     document.getElementById("cldwn").max = cd;
                     document.getElementById("cldwn").value = cd;
                     cd--;
                 }
                 else{
-                    const { value: up } = await Swal.fire({
-                title: "Select upgrade that is not maxed out.",
-                input: "radio",
-            inputOptions: {"damage": "Damage Amount", "duration": "Defense Duration"}
-            });
-                }
+                    upgrade();
+                }  
             }
             else if(up === "damage"){
                 dama++;
