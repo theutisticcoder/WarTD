@@ -115,7 +115,7 @@
                 }
                 else if (wave == false) {
                     firemovee = -650;
-                    if (isCollide(efire, tower)) {
+                    if (isCollide(efire, tower) && !invincible) {
                         health -= 2;
                         document.getElementById("health").value -= 2;
                         efire.remove();
@@ -135,7 +135,7 @@
                 function firem() {
                     firemove -= 10;
                     exp += 10;
-                  
+
                     document.onmousemove = (e) => {
                         fire.style.translate = e.clientX + "px 0px " + firemove + "px";
                     }
@@ -150,11 +150,23 @@
 
                         }
                         fire.remove();
+
                     }
                 }
                 requestAnimationFrame(firem);
             }
+            if(document.activeElement === tow2){
+                setTimeout(shoot, 10000);
+            }
         }
+        var invincible = false;
+        function fdef() {
+            invincible = true;
+            setTimeout(() => {
+                invincible = false
+            }, 20000);
+        }
+
         function shoot(tow, dam) {
             if (tow === "fire") {
                 fire = new Image(200, 200);
@@ -214,7 +226,7 @@
                                 }
                                 setTimeout(shoot, 10000, t1, 2);
                             }
-                            else{
+                            else {
                                 setTimeout(defend2, 10000, time)
                                 setTimeout(attack2, 10000)
                             }
@@ -231,33 +243,41 @@
                             document.body.appendChild(tow2);
                             if (document.activeElement === tow2) {
                                 var damage = 2;
-            var timeoff = 10000;
-            var poison = false;
-            var able = true;
-            document.onkeydown = (e) => {
-                if (e.key === " " && able == true) {
-                    able = false;
-                    shoot(t1, damage);
-                    setTimeout(() => {
-                        able = true;
-                    }, timeoff);
+                                var timeoff = 10000;
+                                var poison = false;
+                                var able = true;
+                                document.onkeydown = (e) => {
+                                    if (e.key === "a" && able == true) {
+                                        able = false;
+                                        shoot(t1, damage);
+                                        setTimeout(() => {
+                                            able = true;
+                                        }, timeoff);
 
-                }
-                if (e.key === "r" && able == true) {
-                    able = false;
-                    tower.ondrag = (e) => {
-                        tower.style.left = e.clientX;
-                    }
-                    setTimeout(() => {
-                        able = true;
-                    }, timeoff);
+                                    }
+                                    if (e.key === " " && able == true) {
+                                        able = false;
+                                        fdef();
+                                        setTimeout(() => {
+                                            able = true;
+                                        }, timeoff);
 
-                }
-            }
-            setTimeout(defend2, 10000, 20000);
-            setTimeout(attack2, 200000)
-                                                            }
-                            else{
+                                    }
+                                    if (e.key === "r" && able == true) {
+                                        able = false;
+                                        tower.ondrag = (e) => {
+                                            tower.style.left = e.clientX;
+                                        }
+                                        setTimeout(() => {
+                                            able = true;
+                                        }, timeoff);
+
+                                    }
+                                }
+                                setTimeout(defend2, 10000, 20000);
+                                setTimeout(attack2, 200000)
+                            }
+                            else {
                                 setTimeout(shoot2, 10000, t2, damage)
                             }
                         }
@@ -326,8 +346,8 @@
                     if (isCollide(fire, etower)) {
                         e1health--;
                         document.getElementById("enemyhealth").value--;
-                        if(document.activeElement === tower){
-                            setTimeout(attack2, 10000)
+                        if (document.activeElement === tower) {
+                            setTimeout(attack2, 20000)
                         }
                     }
                     fire.remove();
@@ -349,8 +369,8 @@
             setTimeout(() => {
                 wave = false;
             }, tim)
-            if(document.activeElement === tower){
-                setTimeout(defend2, 10000, tim)
+            if (document.activeElement === tower) {
+                setTimeout(defend2, 20000, tim)
             }
         }
         if (t1 === "fire") {
@@ -360,9 +380,17 @@
             var poison = false;
             var able = true;
             document.onkeydown = (e) => {
-                if (e.key === " " && able == true) {
+                if (e.key === "a" && able == true) {
                     able = false;
                     shoot(t1, damage);
+                    setTimeout(() => {
+                        able = true;
+                    }, timeoff);
+
+                }
+                if (e.key === " " && able == true) {
+                    able = false;
+                    fdef();
                     setTimeout(() => {
                         able = true;
                     }, timeoff);
