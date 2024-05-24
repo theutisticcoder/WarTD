@@ -237,7 +237,7 @@
                                     able = true;
                                 }, timeoff);
                                 document.onkeydown = (e) => {
-                                    if (e.key === " " && able == true) {
+                                    if (e.key === "d" && able == true) {
                                        cooldown();
                                         defend(time);
                                         setTimeout(() => {
@@ -245,7 +245,7 @@
                                         }, timeoff);
 
                                     }
-                                    if (e.key === "a" && able == true) {
+                                    if (e.key === " " && able == true) {
                                         cooldown();
                                         attack();
                                         setTimeout(() => {
@@ -286,7 +286,7 @@
                                 var poison = false;
                                 var able = true;
                                 document.onkeydown = (e) => {
-                                    if (e.key === "a" && able == true) {
+                                    if (e.key === " " && able == true) {
                                         cooldown();
                                         shoot(t1, damage);
                                         setTimeout(() => {
@@ -294,7 +294,7 @@
                                         }, timeoff);
 
                                     }
-                                    if (e.key === " " && able == true) {
+                                    if (e.key === "d" && able == true) {
                                         cooldown();
                                         fdef();
                                         setTimeout(() => {
@@ -419,7 +419,7 @@
             var poison = false;
             var able = true;
             document.onkeydown = (e) => {
-                if (e.key === "a" && able == true) {
+                if (e.key === " " && able == true) {
                     cooldown();
                     shoot(t1, damage);
                     setTimeout(() => {
@@ -427,7 +427,7 @@
                     }, timeoff);
 
                 }
-                if (e.key === " " && able == true) {
+                if (e.key === "d" && able == true) {
                     cooldown();
                     fdef();
                     setTimeout(() => {
@@ -457,7 +457,7 @@
                 able = true;
             }, timeoff);
             document.onkeydown = (e) => {
-                if (e.key === " " && able == true) {
+                if (e.key === "d" && able == true) {
                     cooldown();
                     defend(time);
                     setTimeout(() => {
@@ -465,7 +465,7 @@
                     }, timeoff);
 
                 }
-                if (e.key === "a" && able == true) {
+                if (e.key === " " && able == true) {
                     cooldown();
                     attack();
                     setTimeout(() => {
