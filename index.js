@@ -36,8 +36,8 @@ io.on('connection', (socket) => {
   socket.on("fire", ()=> {
     socket.to(Array.from(socket.rooms)[1]).emit("fire");
   })
-  socket.on("defend", ()=> {
-    socket.to(Array.from(socket.rooms)[1]).emit("defend");
+  socket.on("defend", (d)=> {
+    socket.to(Array.from(socket.rooms)[1]).emit("def", d);
   })
 });
 

@@ -202,18 +202,18 @@
                         }
                     }
             });
-            socket.on("def", () => {
+            socket.on("def", (d) => {
                 if (et1 === "fire") {
                     invincible = true;
                     setTimeout(() => {
                         invincible = false
-                    }, 5000)
+                    }, d)
                 }
                 else {
                     wave = true;
                     setTimeout(() => {
                         wave = false
-                    }, 5000)
+                    }, d)
                 }
             })
             var fire;
@@ -317,7 +317,7 @@
                                         if (e.key === "d" && able == true) {
                                             cooldown();
                                             defend(time);
-                                            socket.emit("defend");
+                                            socket.emit("defend", dur);
                                             setTimeout(() => {
                                                 able = true;
                                             }, timeoff);
@@ -376,7 +376,7 @@
 
                                         }
                                         if (e.key === "d" && able == true) {
-                                            socket.emit("defend");
+                                            socket.emit("defend", dur);
                                             cooldown();
                                             fdef();
                                             setTimeout(() => {
@@ -532,7 +532,7 @@
                     }
                     if (e.key === "d" && able == true) {
                         cooldown();
-                        socket.emit("defend");
+                        socket.emit("defend", dur);
                         fdef();
                         setTimeout(() => {
                             able = true;
@@ -564,7 +564,7 @@
                     if (e.key === "d" && able == true) {
                         cooldown();
                         defend(dur);
-                        socket.emit("defend");
+                        socket.emit("defend", dur);
                         setTimeout(() => {
                             able = true;
                         }, timeoff);
