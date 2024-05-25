@@ -165,12 +165,10 @@
                     efire.style.position = "absolute"
                     document.body.appendChild(efire);
                     function firem() {
-                        firemovee += 10;
 
-                        document.onmousemove = (e) => {
-                            efire.style.translate = e.clientX + "px 0px " + firemovee + "px";
-                        }
                         if (firemovee < -100 && !wave) {
+                            efire.style.translate = "0px 0px " + firemovee + "px";
+                            firemovee++;
                             requestAnimationFrame(firem);
                         }
                         else {
@@ -187,14 +185,11 @@
                         efire.style.position = "absolute"
                         document.body.appendChild(efire);
                         function firem() {
-                            firemovee += 10;
-                            document.onmousemove = (e) => {
-                                fire.style.translate = e.clientX + "px 0px " + firemovee + "px";
-                            }
                             if (firemovee < -100 && !wave) {
-                                requestAnimationFrame(firem);
-                                requestAnimationFrame(firem);
-                            }
+                            efire.style.translate = "0px 0px " + firemovee + "px";
+                            firemovee++;
+                            requestAnimationFrame(firem);
+                        }
                             else {
                                 firemovee = -650;
                                efire.remove(); 
