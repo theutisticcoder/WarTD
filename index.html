@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
- <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WarTD</title>
@@ -14,9 +14,8 @@
     <button onclick="join()">Join a Friend</button>
     <button onclick="window.location.href = 'battle.html'"> Play a Computer</button>
     <button onclick="create()"> Create a Game</button>
-    <div id="game">
     <style>
-        button{
+        button {
             position: relative;
             z-index: 100;
         }
@@ -29,12 +28,10 @@
 
         body {
             background: green;
-           
-        }
-#game{
             perspective: 500px;
             overflow: hidden;
-}
+        }
+
         #home {
             position: absolute;
             transform-style: preserve-3d;
@@ -106,21 +103,19 @@
     <model-viewer id="enemy" src="newscene.glb"></model-viewer>
     <model-viewer id="tower" class="tower" src="tower.glb"></model-viewer>
     <model-viewer id="etower" class="tower" src="Fire.glb"></model-viewer>
-  
-    </div>
-      <script>
+    <script>
         const socket = io();
-         var firemove = 0;
+        var firemove = 0;
         var wave = false;
         var firemovee = -650;
         var efire;
         var et1;
         socket.on("recieve", (theme) => {
             et1 = theme;
-            if(et1 === 'fire'){
+            if (et1 === 'fire') {
                 etower.src = "Fire.glb";
             }
-            if(et1 === 'water'){
+            if (et1 === 'water') {
                 etower.src = "Water.glb";
             }
         })
@@ -146,515 +141,515 @@
         var back = false;
         var health = 100;
         var t1 = options[Math.floor(Math.random() * options.length)];
-        function game(){
-        
-        alert("Tower one is " + t1 + ".");
-        function isCollide(a, b) {
-            a = a.getBoundingClientRect();
-            b = b.getBoundingClientRect();
-            return !(
-                ((a.x + a.width) < b.x) ||
-                (a.x > (b.x + b.width))
-            );
-        }
-       
-        socket.on("fire", () => {
-            if (et1 === "fire") {
-                efire = new Image(200, 200);
-                efire.src = "fire.png";
-                efire.style.position = "absolute"
-                document.getElementById("game").appendChild(efire);
-                function firem() {
-                    firemovee += 10;
+        function game() {
 
-                    document.onmousemove = (e) => {
-                        efire.style.translate = e.clientX + "px 0px " + firemovee + "px";
-                    }
-                    if (firemovee < -100) {
-                        requestAnimationFrame(firem);
-                    }
-                    else {
-                        firemovee = 0;
-                        if (isCollide(efire, tower)) {
-                            e1health -= edam;
-                            document.getElementById("enemyhealth").value -= edam;
-                            hits++;
-                            if (hits === 10) {
-                                hits = 0;
-                                upgrade();
-                            }
-
-                        }
-                        efire.remove();
-
-                    }
-                }
+            alert("Tower one is " + t1 + ".");
+            function isCollide(a, b) {
+                a = a.getBoundingClientRect();
+                b = b.getBoundingClientRect();
+                return !(
+                    ((a.x + a.width) < b.x) ||
+                    (a.x > (b.x + b.width))
+                );
             }
-            else {
-                function eattack() {
+
+            socket.on("fire", () => {
+                if (et1 === "fire") {
                     efire = new Image(200, 200);
-                    efire.src = "water.png";
+                    efire.src = "fire.png";
                     efire.style.position = "absolute"
-                    document.getElementById("game").appendChild(fire);
+                    document.getElementById("game").appendChild(efire);
                     function firem() {
-                        firemovee -= 10;
+                        firemovee += 10;
+
                         document.onmousemove = (e) => {
-                            fire.style.translate = e.clientX + "px 0px " + firemovee + "px";
+                            efire.style.translate = e.clientX + "px 0px " + firemovee + "px";
                         }
                         if (firemovee < -100) {
-                            requestAnimationFrame(firem);
                             requestAnimationFrame(firem);
                         }
                         else {
                             firemovee = 0;
-                            if (isCollide(fire, etower)) {
-                                e1health -= dama;
-                                document.getElementById("enemyhealth").value -= dama;
+                            if (isCollide(efire, tower)) {
+                                e1health -= edam;
+                                document.getElementById("enemyhealth").value -= edam;
                                 hits++;
                                 if (hits === 10) {
                                     hits = 0;
                                     upgrade();
                                 }
+
+                            }
+                            efire.remove();
+
+                        }
+                    }
+                }
+                else {
+                    function eattack() {
+                        efire = new Image(200, 200);
+                        efire.src = "water.png";
+                        efire.style.position = "absolute"
+                        document.getElementById("game").appendChild(fire);
+                        function firem() {
+                            firemovee -= 10;
+                            document.onmousemove = (e) => {
+                                fire.style.translate = e.clientX + "px 0px " + firemovee + "px";
+                            }
+                            if (firemovee < -100) {
+                                requestAnimationFrame(firem);
+                                requestAnimationFrame(firem);
+                            }
+                            else {
+                                firemovee = 0;
+                                if (isCollide(fire, etower)) {
+                                    e1health -= dama;
+                                    document.getElementById("enemyhealth").value -= dama;
+                                    hits++;
+                                    if (hits === 10) {
+                                        hits = 0;
+                                        upgrade();
+                                    }
+                                }
+                                fire.remove();
+                            }
+                        }
+                    }
+                }
+            });
+            socket.on("def", () => {
+                if (et1 === "fire") {
+                    invincible = true;
+                    setTimeout(() => {
+                        invincible = false
+                    }, 5000)
+                }
+                else {
+                    wave = true;
+                    setTimeout(() => {
+                        wave = false
+                    }, 5000)
+                }
+            })
+            var fire;
+            function shoot2(tow, dam) {
+                if (tow === "fire") {
+                    fire = new Image(200, 200);
+                    fire.src = "fire.png";
+                    fire.style.position = "absolute"
+                    document.getElementById("game").appendChild(fire);
+                    function firem() {
+                        firemove -= 10;
+                        exp += 10;
+
+                        document.onmousemove = (e) => {
+                            fire.style.translate = e.clientX + "px 0px " + firemove + "px";
+                        }
+                        if (firemove > -650) {
+                            requestAnimationFrame(firem);
+                        }
+                        else {
+                            firemove = 0;
+                            if (isCollide(fire, etower)) {
+                                e1health -= dam;
+                                document.getElementById("enemyhealth").value -= dam;
+                                hits++;
+                                if (hits === 10) {
+                                    hits = 0;
+                                    upgrade();
+                                }
+
+                            }
+                            fire.remove();
+
+                        }
+                    }
+                    requestAnimationFrame(firem);
+                }
+                if (document.activeElement === tow2) {
+                    setTimeout(shoot, 10000);
+                }
+            }
+            var cd = 10
+            function cooldown() {
+                able = false;
+                if (cd > 0) {
+                    cd--;
+                    document.getElementById("cldwn").value = cd;
+                    setTimeout(cooldown, 1000);
+                }
+                else {
+                    cd = document.getElementById("cldwn").max;
+                    document.getElementById("cldwn").value = cd;
+                    able = true;
+                }
+
+            }
+            var invincible = false;
+            function fdef() {
+                if (document.activeElement.src === "Fire.glb") {
+                    alert("FireWall Activated, you are invincible for 20 seconds.")
+                    invincible = true;
+                    setTimeout(() => {
+                        invincible = false
+                    }, dur);
+                }
+
+            }
+            var hits = 0;
+            function shoot(tow, dam) {
+                if (tow === "fire") {
+                    fire = new Image(200, 200);
+                    fire.src = "fire.png";
+                    fire.style.position = "absolute"
+                    document.getElementById("game").appendChild(fire);
+                    function firem() {
+                        firemove -= 10;
+                        exp += 10;
+                        if (exp === 10000) {
+                            exp = 0;
+                            alert("You got a new Tower! Click the tower you want to use currently to control it!");
+                            if (t1 === "fire") {
+                                t2 = "water";
+                                var tow2 = tower.cloneNode(true);
+                                tow2.style.position = "absolute";
+                                tow2.style.width = "50px";
+                                tow2.style.height = "500px";
+                                tow2.style.translate = "500px 0px -100px"
+                                tow2.style.transformStyle = "preserve-3d"
+                                tow2.src = "Water.glb";
+                                document.getElementById("game").appendChild(tow2);
+                                if (document.activeElement === tow2) {
+                                    var time = 20000;
+                                    var timeoff = 10000;
+                                    var poison = false;
+                                    var able = false;
+                                    setTimeout(() => {
+                                        able = true;
+                                    }, timeoff);
+                                    document.onkeydown = (e) => {
+                                        if (e.key === "d" && able == true) {
+                                            cooldown();
+                                            defend(time);
+                                            socket.emit("defend");
+                                            setTimeout(() => {
+                                                able = true;
+                                            }, timeoff);
+
+                                        }
+                                        if (e.key === " " && able == true) {
+                                            cooldown();
+                                            attack();
+                                            socket.emit("fire")
+
+                                            setTimeout(() => {
+                                                able = true;
+                                            }, timeoff);
+
+                                        }
+                                        if (e.key === "r" && able == true) {
+                                            tower.ondrag = (e) => {
+                                                tower.style.left = e.clientX + "px";
+                                            }
+                                            setTimeout(() => {
+                                                able = true;
+                                            }, timeoff);
+
+                                        }
+                                    }
+                                    setTimeout(shoot, 10000, t1, 2);
+                                }
+                                else {
+                                    setTimeout(defend2, 10000, dur)
+                                    setTimeout(attack2, 20000)
+                                }
+                            }
+                            else if (t1 === "water") {
+                                t2 = "fire";
+                                var tow2 = tower.cloneNode(true);
+                                tow2.style.position = "absolute";
+                                tow2.style.width = "50px";
+                                tow2.style.height = "500px";
+                                tow2.style.translate = "500px 0px -100px"
+                                tow2.style.transformStyle = "preserve-3d"
+                                tow2.src = "Fire.glb";
+                                document.getElementById("game").appendChild(tow2);
+                                if (document.activeElement === tow2) {
+                                    var damage = 2;
+                                    var timeoff = 10000;
+                                    var poison = false;
+                                    var able = true;
+                                    document.onkeydown = (e) => {
+                                        if (e.key === " " && able == true) {
+                                            cooldown();
+                                            shoot(t1, damage);
+                                            socket.emit("fire")
+                                            setTimeout(() => {
+                                                able = true;
+                                            }, timeoff);
+
+                                        }
+                                        if (e.key === "d" && able == true) {
+                                            socket.emit("defend");
+                                            cooldown();
+                                            fdef();
+                                            setTimeout(() => {
+                                                able = true;
+                                            }, timeoff);
+
+                                        }
+                                        if (e.key === "r" && able == true) {
+                                            cooldown();
+                                            tower.ondrag = (e) => {
+                                                tower.style.left = e.clientX;
+                                            }
+                                            setTimeout(() => {
+                                                able = true;
+                                            }, timeoff);
+
+                                        }
+                                    }
+                                    setTimeout(defend2, 10000, dur);
+                                    setTimeout(attack2, 20000)
+                                }
+                                else {
+                                    setTimeout(shoot2, 10000, t2, damage)
+                                }
+                            }
+                        }
+                        document.onmousemove = (e) => {
+                            fire.style.translate = e.clientX + "px 0px " + firemove + "px";
+                        }
+                        if (firemove > -650 && !wave) {
+                            requestAnimationFrame(firem);
+                        }
+                        else {
+                            firemove = 0;
+                            if (isCollide(fire, etower) && !invincible) {
+                                hits++;
+                                if (hits === 10) {
+                                    hits = 0;
+                                    upgrade();
+                                }
+                                e1health -= dam;
+                                document.getElementById("enemyhealth").value -= dam;
+
                             }
                             fire.remove();
                         }
                     }
+                    requestAnimationFrame(firem);
                 }
             }
-        });
-        socket.on("def", ()=>{
-            if(et1 === "fire"){
-                invincible = true;
-                setTimeout(()=> {
-                    invincible = false
-                }, 5000)
-            }
-            else{
-                wave = true;
-                setTimeout(()=> {
-                    wave = false
-                }, 5000)
-            }
-        })
-        var fire;
-        function shoot2(tow, dam) {
-            if (tow === "fire") {
+            var watermove = 0;
+            var wx = 0;
+            function attack() {
                 fire = new Image(200, 200);
-                fire.src = "fire.png";
+                fire.src = "water.png";
                 fire.style.position = "absolute"
                 document.getElementById("game").appendChild(fire);
                 function firem() {
-                    firemove -= 10;
-                    exp += 10;
-
+                    watermove -= 10;
                     document.onmousemove = (e) => {
-                        fire.style.translate = e.clientX + "px 0px " + firemove + "px";
+                        fire.style.translate = e.clientX + "px 0px " + watermove + "px";
                     }
-                    if (firemove > -650) {
+                    if (watermove > -650) {
                         requestAnimationFrame(firem);
                     }
                     else {
-                        firemove = 0;
+                        watermove = 0;
                         if (isCollide(fire, etower)) {
-                            e1health -= dam;
-                            document.getElementById("enemyhealth").value -= dam;
+                            e1health -= dama;
+                            document.getElementById("enemyhealth").value -= dama;
                             hits++;
                             if (hits === 10) {
                                 hits = 0;
                                 upgrade();
                             }
-
                         }
                         fire.remove();
-
                     }
                 }
                 requestAnimationFrame(firem);
             }
-            if (document.activeElement === tow2) {
-                setTimeout(shoot, 10000);
-            }
-        }
-        var cd = 10
-        function cooldown() {
-            able = false;
-            if (cd > 0) {
-                cd--;
-                document.getElementById("cldwn").value = cd;
-                setTimeout(cooldown, 1000);
-            }
-            else {
-                cd = document.getElementById("cldwn").max;
-                document.getElementById("cldwn").value = cd;
-                able = true;
-            }
-
-        }
-        var invincible = false;
-        function fdef() {
-            if (document.activeElement.src === "Fire.glb") {
-                alert("FireWall Activated, you are invincible for 20 seconds.")
-                invincible = true;
-                setTimeout(() => {
-                    invincible = false
-                }, dur);
-            }
-
-        }
-        var hits = 0;
-        function shoot(tow, dam) {
-            if (tow === "fire") {
+            function attack2() {
                 fire = new Image(200, 200);
-                fire.src = "fire.png";
+                fire.src = "water.png";
                 fire.style.position = "absolute"
                 document.getElementById("game").appendChild(fire);
                 function firem() {
-                    firemove -= 10;
-                    exp += 10;
-                    if (exp === 10000) {
-                        exp = 0;
-                        alert("You got a new Tower! Click the tower you want to use currently to control it!");
-                        if (t1 === "fire") {
-                            t2 = "water";
-                            var tow2 = tower.cloneNode(true);
-                            tow2.style.position = "absolute";
-                            tow2.style.width = "50px";
-                            tow2.style.height = "500px";
-                            tow2.style.translate = "500px 0px -100px"
-                            tow2.style.transformStyle = "preserve-3d"
-                            tow2.src = "Water.glb";
-                            document.getElementById("game").appendChild(tow2);
-                            if (document.activeElement === tow2) {
-                                var time = 20000;
-                                var timeoff = 10000;
-                                var poison = false;
-                                var able = false;
-                                setTimeout(() => {
-                                    able = true;
-                                }, timeoff);
-                                document.onkeydown = (e) => {
-                                    if (e.key === "d" && able == true) {
-                                        cooldown();
-                                        defend(time);
-                                        socket.emit("defend");
-                                        setTimeout(() => {
-                                            able = true;
-                                        }, timeoff);
-
-                                    }
-                                    if (e.key === " " && able == true) {
-                                        cooldown();
-                                        attack();
-                                        socket.emit("fire")
-
-                                        setTimeout(() => {
-                                            able = true;
-                                        }, timeoff);
-
-                                    }
-                                    if (e.key === "r" && able == true) {
-                                        tower.ondrag = (e) => {
-                                            tower.style.left = e.clientX + "px";
-                                        }
-                                        setTimeout(() => {
-                                            able = true;
-                                        }, timeoff);
-
-                                    }
-                                }
-                                setTimeout(shoot, 10000, t1, 2);
-                            }
-                            else {
-                                setTimeout(defend2, 10000, dur)
-                                setTimeout(attack2, 20000)
-                            }
-                        }
-                        else if (t1 === "water") {
-                            t2 = "fire";
-                            var tow2 = tower.cloneNode(true);
-                            tow2.style.position = "absolute";
-                            tow2.style.width = "50px";
-                            tow2.style.height = "500px";
-                            tow2.style.translate = "500px 0px -100px"
-                            tow2.style.transformStyle = "preserve-3d"
-                            tow2.src = "Fire.glb";
-                            document.getElementById("game").appendChild(tow2);
-                            if (document.activeElement === tow2) {
-                                var damage = 2;
-                                var timeoff = 10000;
-                                var poison = false;
-                                var able = true;
-                                document.onkeydown = (e) => {
-                                    if (e.key === " " && able == true) {
-                                        cooldown();
-                                        shoot(t1, damage);
-                                        socket.emit("fire")
-                                        setTimeout(() => {
-                                            able = true;
-                                        }, timeoff);
-
-                                    }
-                                    if (e.key === "d" && able == true) {
-                                        socket.emit("defend");
-                                        cooldown();
-                                        fdef();
-                                        setTimeout(() => {
-                                            able = true;
-                                        }, timeoff);
-
-                                    }
-                                    if (e.key === "r" && able == true) {
-                                        cooldown();
-                                        tower.ondrag = (e) => {
-                                            tower.style.left = e.clientX;
-                                        }
-                                        setTimeout(() => {
-                                            able = true;
-                                        }, timeoff);
-
-                                    }
-                                }
-                                setTimeout(defend2, 10000, dur);
-                                setTimeout(attack2, 20000)
-                            }
-                            else {
-                                setTimeout(shoot2, 10000, t2, damage)
-                            }
-                        }
-                    }
+                    watermove -= 10;
                     document.onmousemove = (e) => {
-                        fire.style.translate = e.clientX + "px 0px " + firemove + "px";
+                        fire.style.translate = e.clientX + "px 0px " + watermove + "px";
                     }
-                    if (firemove > -650 && !wave) {
+                    if (watermove > -650) {
                         requestAnimationFrame(firem);
                     }
                     else {
-                        firemove = 0;
-                        if (isCollide(fire, etower) && !invincible) {
+                        watermove = 0;
+                        if (isCollide(fire, etower)) {
+                            e1health -= dama;
+                            document.getElementById("enemyhealth").value -= dama;
                             hits++;
                             if (hits === 10) {
                                 hits = 0;
                                 upgrade();
                             }
-                            e1health -= dam;
-                            document.getElementById("enemyhealth").value -= dam;
 
+                        }
+                        if (document.activeElement === tower) {
+                            setTimeout(attack2, 20000)
                         }
                         fire.remove();
                     }
                 }
                 requestAnimationFrame(firem);
             }
-        }
-        var watermove = 0;
-        var wx = 0;
-        function attack() {
-            fire = new Image(200, 200);
-            fire.src = "water.png";
-            fire.style.position = "absolute"
-            document.getElementById("game").appendChild(fire);
-            function firem() {
-                watermove -= 10;
-                document.onmousemove = (e) => {
-                    fire.style.translate = e.clientX + "px 0px " + watermove + "px";
+            function defend(tim) {
+                wave = true;
+                alert("Enemy stunned for " + tim / 1000 + " seconds.")
+                setTimeout(() => {
+                    wave = false;
+                }, tim)
+
+            }
+            function defend2(tim) {
+                wave = true;
+                alert("Enemy stunned for " + tim / 1000 + " seconds.")
+                setTimeout(() => {
+                    wave = false;
+                }, tim)
+                if (document.activeElement === tower) {
+                    setTimeout(defend2, 20000, dur)
                 }
-                if (watermove > -650) {
-                    requestAnimationFrame(firem);
-                }
-                else {
-                    watermove = 0;
-                    if (isCollide(fire, etower)) {
-                        e1health -= dama;
-                        document.getElementById("enemyhealth").value -= dama;
-                        hits++;
-                        if (hits === 10) {
-                            hits = 0;
-                            upgrade();
+            }
+            if (t1 === "fire") {
+                var damage = 2;
+                tower.src = "Fire.glb"
+                var timeoff = 10000;
+                var poison = false;
+                var able = true;
+                document.onkeydown = (e) => {
+                    if (e.key === " " && able == true) {
+                        cooldown();
+                        shoot(t1, dama);
+                        socket.emit("fire")
+
+                    }
+                    if (e.key === "d" && able == true) {
+                        cooldown();
+                        socket.emit("defend");
+                        fdef();
+                        setTimeout(() => {
+                            able = true;
+                        }, timeoff);
+
+                    }
+                    if (e.key === "r" && able == true) {
+                        cooldown();
+                        tower.ondrag = (e) => {
+                            tower.style.left = e.clientX;
                         }
+                        setTimeout(() => {
+                            able = true;
+                        }, timeoff);
+
                     }
-                    fire.remove();
                 }
             }
-            requestAnimationFrame(firem);
-        }
-        function attack2() {
-            fire = new Image(200, 200);
-            fire.src = "water.png";
-            fire.style.position = "absolute"
-            document.getElementById("game").appendChild(fire);
-            function firem() {
-                watermove -= 10;
-                document.onmousemove = (e) => {
-                    fire.style.translate = e.clientX + "px 0px " + watermove + "px";
-                }
-                if (watermove > -650) {
-                    requestAnimationFrame(firem);
-                }
-                else {
-                    watermove = 0;
-                    if (isCollide(fire, etower)) {
-                        e1health -= dama;
-                        document.getElementById("enemyhealth").value -= dama;
-                        hits++;
-                        if (hits === 10) {
-                            hits = 0;
-                            upgrade();
+            if (t1 === "water") {
+                tower.src = "Water.glb"
+                dur = 20000;
+                var timeoff = 10000;
+                var poison = false;
+                var able = true;
+                setTimeout(() => {
+                    able = true;
+                }, timeoff);
+                document.onkeydown = (e) => {
+                    if (e.key === "d" && able == true) {
+                        cooldown();
+                        defend(dur);
+                        socket.emit("defend");
+                        setTimeout(() => {
+                            able = true;
+                        }, timeoff);
+
+                    }
+                    if (e.key === " " && able == true) {
+                        cooldown();
+                        attack();
+                        socket.emit("fire")
+                        setTimeout(() => {
+                            able = true;
+                        }, timeoff);
+
+                    }
+                    if (e.key === "r" && able == true) {
+                        tower.ondrag = (e) => {
+                            tower.style.left = e.clientX + "px";
                         }
+                        setTimeout(() => {
+                            able = true;
+                        }, timeoff);
 
                     }
-                    if (document.activeElement === tower) {
-                        setTimeout(attack2, 20000)
+                }
+            }
+
+            async function upgrade() {
+                const { value: up } = await Swal.fire({
+                    title: "Select Upgrade",
+                    input: "radio",
+                    inputOptions: { "cooldown": "Cooldown Time", "damage": "Damage Amount", "duration": "Defense Duration" }
+                });
+                if (up === "cooldown") {
+
+                    if (document.getElementById("cldwn").max > 5) {
+                        document.getElementById("cldwn").max = cd;
+                        document.getElementById("cldwn").value = cd;
+                        cd--;
                     }
-                    fire.remove();
-                }
-            }
-            requestAnimationFrame(firem);
-        }
-        function defend(tim) {
-            wave = true;
-            alert("Enemy stunned for " + tim / 1000 + " seconds.")
-            setTimeout(() => {
-                wave = false;
-            }, tim)
-
-        }
-        function defend2(tim) {
-            wave = true;
-            alert("Enemy stunned for " + tim / 1000 + " seconds.")
-            setTimeout(() => {
-                wave = false;
-            }, tim)
-            if (document.activeElement === tower) {
-                setTimeout(defend2, 20000, dur)
-            }
-        }
-        if (t1 === "fire") {
-            var damage = 2;
-            tower.src = "Fire.glb"
-            var timeoff = 10000;
-            var poison = false;
-            var able = true;
-            document.onkeydown = (e) => {
-                if (e.key === " " && able == true) {
-                    cooldown();
-                    shoot(t1, dama);
-                   socket.emit("fire")
-
-                }
-                if (e.key === "d" && able == true) {
-                    cooldown();
-                    socket.emit("defend");
-                    fdef();
-                    setTimeout(() => {
-                        able = true;
-                    }, timeoff);
-
-                }
-                if (e.key === "r" && able == true) {
-                    cooldown();
-                    tower.ondrag = (e) => {
-                        tower.style.left = e.clientX;
+                    else {
+                        upgrade();
                     }
-                    setTimeout(() => {
-                        able = true;
-                    }, timeoff);
-
                 }
-            }
-        }
-        if (t1 === "water") {
-            tower.src = "Water.glb"
-            dur = 20000;
-            var timeoff = 10000;
-            var poison = false;
-            var able = true;
-            setTimeout(() => {
-                able = true;
-            }, timeoff);
-            document.onkeydown = (e) => {
-                if (e.key === "d" && able == true) {
-                    cooldown();
-                    defend(dur);
-                    socket.emit("defend");
-                    setTimeout(() => {
-                        able = true;
-                    }, timeoff);
-
-                }
-                if (e.key === " " && able == true) {
-                    cooldown();
-                    attack();
-                    socket.emit("fire")
-                    setTimeout(() => {
-                        able = true;
-                    }, timeoff);
-
-                }
-                if (e.key === "r" && able == true) {
-                    tower.ondrag = (e) => {
-                        tower.style.left = e.clientX + "px";
-                    }
-                    setTimeout(() => {
-                        able = true;
-                    }, timeoff);
-
-                }
-            }
-        }
-
-        async function upgrade() {
-            const { value: up } = await Swal.fire({
-                title: "Select Upgrade",
-                input: "radio",
-                inputOptions: { "cooldown": "Cooldown Time", "damage": "Damage Amount", "duration": "Defense Duration" }
-            });
-            if (up === "cooldown") {
-
-                if (document.getElementById("cldwn").max > 5) {
-                    document.getElementById("cldwn").max = cd;
-                    document.getElementById("cldwn").value = cd;
-                    cd--;
+                else if (up === "damage") {
+                    dama++;
                 }
                 else {
-                    upgrade();
+                    dur += 3000;
                 }
+
             }
-            else if (up === "damage") {
-                dama++;
-            }
-            else {
-                dur += 3000;
-            }
-           
-        }
-        socket.emit("et1", t1);
+            socket.emit("et1", t1);
         }
     </script>
     <script>
 
-        function join(){
+        function join() {
             var roomname = prompt("What is the room?");
             socket.emit("join", roomname);
         }
-        function create(){
+        function create() {
             var roomname = prompt("Choose a room name.");
             socket.emit("start", roomname);
         }
         socket.on("opengame", () => {
-              document.getElementById("game").hidden = false;            
+            document.getElementById("game").hidden = false;
 
-              game();
-            })
-            socket.on("success", () => {
-                alert("Waiting of another player.");
-            })
-            socket.on("no", () => {
-                alert("room not found.");
-            })
-            socket.on("taken", () => {
-                alert("room name taken, pleasse try again.")
-            })
-            
+            game();
+        })
+        socket.on("success", () => {
+            alert("Waiting of another player.");
+        })
+        socket.on("no", () => {
+            alert("room not found.");
+        })
+        socket.on("taken", () => {
+            alert("room name taken, pleasse try again.")
+        })
+
     </script>
 </body>
 
