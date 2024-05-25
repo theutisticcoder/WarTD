@@ -239,7 +239,7 @@
                                 e1health -= dam;
                                 document.getElementById("enemyhealth").value -= dam;
                                 hits++;
-                                socket.emit("damage", dam);
+                                socket.emit("damage", dama);
                                 if (hits === 10) {
                                     hits = 0;
                                     upgrade();
@@ -413,7 +413,7 @@
                             firemove = 0;
                             if (isCollide(fire, etower) && !invincible) {
                                 hits++;
-                                socket.emit("damage", dam);
+                                socket.emit("damage", dama);
                                 if (hits === 10) {
                                     hits = 0;
                                     upgrade();
@@ -449,7 +449,7 @@
                             e1health -= dama;
                             document.getElementById("enemyhealth").value -= dama;
                             hits++;
-                            socket.emit("damage", dam);
+                            socket.emit("damage", dama);
                             if (hits === 10) {
                                 hits = 0;
                                 upgrade();
@@ -484,7 +484,7 @@
                             e1health -= dama;
                             document.getElementById("enemyhealth").value -= dama;
                             hits++;
-                            socket.emit("damage", dam);
+                            socket.emit("damage", dama);
                             if (hits === 10) {
                                 hits = 0;
                                 upgrade();
