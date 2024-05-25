@@ -438,6 +438,119 @@
                 document.body.appendChild(fire);
                 function firem() {
                     watermove -= 10;
+                    exp += 10;
+                        if (exp === 10000) {
+                            exp = 0;
+                            alert("You got a new Tower! Click the tower you want to use currently to control it!");
+                            if (t1 === "fire") {
+                                t2 = "water";
+                                var tow2 = tower.cloneNode(true);
+                                tow2.style.position = "absolute";
+                                tow2.style.width = "50px";
+                                tow2.style.height = "500px";
+                                tow2.style.translate = "500px 0px -100px"
+                                tow2.style.transformStyle = "preserve-3d"
+                                tow2.src = "Water.glb";
+                                document.body.appendChild(tow2);
+                                if (document.activeElement === tow2) {
+                                    var time = 20000;
+                                    var timeoff = 10000;
+                                    var poison = false;
+                                    var able = false;
+                                    setTimeout(() => {
+                                        able = true;
+                                    }, timeoff);
+                                    document.onkeydown = (e) => {
+                                        if (e.key === "d" && able == true) {
+                                            cooldown();
+                                            defend(time);
+                                            socket.emit("defend", dur);
+                                            setTimeout(() => {
+                                                able = true;
+                                            }, timeoff);
+
+                                        }
+                                        if (e.key === " " && able == true) {
+                                            cooldown();
+                                            attack();
+                                            socket.emit("fire")
+
+                                            setTimeout(() => {
+                                                able = true;
+                                            }, timeoff);
+
+                                        }
+                                        if (e.key === "r" && able == true) {
+                                            tower.ondrag = (e) => {
+                                                tower.style.left = e.clientX + "px";
+                                            }
+                                            setTimeout(() => {
+                                                able = true;
+                                            }, timeoff);
+
+                                        }
+                                    }
+                                    setTimeout(shoot, 10000, t1, 2);
+                                }
+                                else {
+                                    setTimeout(defend2, 10000, dur)
+                                    setTimeout(attack2, 20000)
+                                }
+                            }
+                            else if (t1 === "water") {
+                                t2 = "fire";
+                                var tow2 = tower.cloneNode(true);
+                                tow2.style.position = "absolute";
+                                tow2.style.width = "50px";
+                                tow2.style.height = "500px";
+                                tow2.style.translate = "500px 0px -100px"
+                                tow2.style.transformStyle = "preserve-3d"
+                                tow2.src = "Fire.glb";
+                                document.body.appendChild(tow2);
+                                if (document.activeElement === tow2) {
+                                    var damage = 2;
+                                    var timeoff = 10000;
+                                    var poison = false;
+                                    var able = true;
+                                    document.onkeydown = (e) => {
+                                        if (e.key === " " && able == true) {
+                                            cooldown();
+                                            shoot(t1, damage);
+                                            socket.emit("fire")
+                                            setTimeout(() => {
+                                                able = true;
+                                            }, timeoff);
+
+                                        }
+                                        if (e.key === "d" && able == true) {
+                                            socket.emit("defend", dur);
+                                            cooldown();
+                                            fdef();
+                                            setTimeout(() => {
+                                                able = true;
+                                            }, timeoff);
+
+                                        }
+                                        if (e.key === "r" && able == true) {
+                                            cooldown();
+                                            tower.ondrag = (e) => {
+                                                tower.style.left = e.clientX;
+                                            }
+                                            setTimeout(() => {
+                                                able = true;
+                                            }, timeoff);
+
+                                        }
+                                    }
+                                    setTimeout(defend2, 10000, dur);
+                                    setTimeout(attack2, 20000)
+                                }
+                                else {
+                                    setTimeout(shoot2, 10000, t2, damage)
+                                }
+                            }
+                        }
+       
                     document.onmousemove = (e) => {
                         fire.style.translate = e.clientX + "px 0px " + watermove + "px";
                     }
