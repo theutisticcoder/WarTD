@@ -273,13 +273,12 @@
             }
             var invincible = false;
             function fdef() {
-                if (document.activeElement.src === "Fire.glb") {
+
                     alert("FireWall Activated, you are invincible for 5 seconds.")
                     invincible = true;
                     setTimeout(() => {
                         invincible = false
                     }, dur);
-                }
 
             }
             var hits = 0;
