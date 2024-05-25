@@ -163,7 +163,7 @@
                 efire = new Image(200, 200);
                 efire.src = "fire.png";
                 efire.style.position = "absolute"
-                document.body.appendChild(efire);
+                document.getElementById("game").appendChild(efire);
                 function firem() {
                     firemovee += 10;
 
@@ -195,7 +195,7 @@
                     efire = new Image(200, 200);
                     efire.src = "water.png";
                     efire.style.position = "absolute"
-                    document.body.appendChild(fire);
+                    document.getElementById("game").appendChild(fire);
                     function firem() {
                         firemovee -= 10;
                         document.onmousemove = (e) => {
@@ -242,7 +242,7 @@
                 fire = new Image(200, 200);
                 fire.src = "fire.png";
                 fire.style.position = "absolute"
-                document.body.appendChild(fire);
+                document.getElementById("game").appendChild(fire);
                 function firem() {
                     firemove -= 10;
                     exp += 10;
@@ -307,7 +307,7 @@
                 fire = new Image(200, 200);
                 fire.src = "fire.png";
                 fire.style.position = "absolute"
-                document.body.appendChild(fire);
+                document.getElementById("game").appendChild(fire);
                 function firem() {
                     firemove -= 10;
                     exp += 10;
@@ -323,7 +323,7 @@
                             tow2.style.translate = "500px 0px -100px"
                             tow2.style.transformStyle = "preserve-3d"
                             tow2.src = "Water.glb";
-                            document.body.appendChild(tow2);
+                            document.getElementById("game").appendChild(tow2);
                             if (document.activeElement === tow2) {
                                 var time = 20000;
                                 var timeoff = 10000;
@@ -378,7 +378,7 @@
                             tow2.style.translate = "500px 0px -100px"
                             tow2.style.transformStyle = "preserve-3d"
                             tow2.src = "Fire.glb";
-                            document.body.appendChild(tow2);
+                            document.getElementById("game").appendChild(tow2);
                             if (document.activeElement === tow2) {
                                 var damage = 2;
                                 var timeoff = 10000;
@@ -452,7 +452,7 @@
             fire = new Image(200, 200);
             fire.src = "water.png";
             fire.style.position = "absolute"
-            document.body.appendChild(fire);
+            document.getElementById("game").appendChild(fire);
             function firem() {
                 watermove -= 10;
                 document.onmousemove = (e) => {
@@ -481,7 +481,7 @@
             fire = new Image(200, 200);
             fire.src = "water.png";
             fire.style.position = "absolute"
-            document.body.appendChild(fire);
+            document.getElementById("game").appendChild(fire);
             function firem() {
                 watermove -= 10;
                 document.onmousemove = (e) => {
