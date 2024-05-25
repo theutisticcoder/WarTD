@@ -274,7 +274,7 @@
             var invincible = false;
             function fdef() {
                 if (document.activeElement.src === "Fire.glb") {
-                    alert("FireWall Activated, you are invincible for 20 seconds.")
+                    alert("FireWall Activated, you are invincible for 5 seconds.")
                     invincible = true;
                     setTimeout(() => {
                         invincible = false
@@ -631,7 +631,7 @@
         }
         socket.on("opengame", game)
         socket.on("success", () => {
-            alert("Waiting of another player.");
+            alert("Waiting for another player.");
         })
         socket.on("no", () => {
             alert("room not found.");
