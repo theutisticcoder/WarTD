@@ -17,7 +17,7 @@ io.on('connection', (socket) => {
     }
   })
   socket.on("damage", (da)=> {
-    socket.to(Array.from(socket.rooms)[1].emit("dam", da));
+    socket.to(Array.from(socket.rooms)[1]).emit("dam", da);
   })
   socket.on("start", r=> {
     if(rooms.includes(r)){
