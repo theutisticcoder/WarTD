@@ -10,7 +10,7 @@ io.on('connection', (socket) => {
   socket.on("join", r=> {
     if(rooms.includes(r)){
         socket.join(r);
-        socket.to(r).emit("opengame");
+        io.to(r).emit("opengame");
     }
     else{
         socket.emit("no");
@@ -28,7 +28,7 @@ io.on('connection', (socket) => {
     }
   })
   socket.on("et1", (t)=> {
-    socket.to(Array.from(socket.rooms)[1]).emit("et1", t);
+    socket.to(Array.from(socket.rooms)[1]).emit("recieve", t);
   })
   socket.on("fire", ()=> {
     socket.to(Array.from(socket.rooms)[1]).emit("fire");
