@@ -635,11 +635,7 @@
             var roomname = prompt("Choose a room name.");
             socket.emit("start", roomname);
         }
-        socket.on("opengame", () => {
-            document.getElementById("game").hidden = false;
-
-            game();
-        })
+        socket.on("opengame", game)
         socket.on("success", () => {
             alert("Waiting of another player.");
         })
