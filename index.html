@@ -168,7 +168,7 @@
 
                         if (firemovee < -100 && !wave) {
                             efire.style.translate = "0px 0px " + firemovee + "px";
-                            firemovee++;
+                            firemovee += 10;
                             requestAnimationFrame(firem);
                         }
                         else {
@@ -188,7 +188,7 @@
                         function firem() {
                             if (firemovee < -100 && !wave) {
                             efire.style.translate = "0px 0px " + firemovee + "px";
-                            firemovee++;
+                            firemovee += 10;
                             requestAnimationFrame(firem);
                         }
                             else {
