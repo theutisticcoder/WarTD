@@ -170,53 +170,37 @@
                         document.onmousemove = (e) => {
                             efire.style.translate = e.clientX + "px 0px " + firemovee + "px";
                         }
-                        if (firemovee < -100) {
+                        if (firemovee < -100 && !wave) {
                             requestAnimationFrame(firem);
                         }
                         else {
-                            firemovee = 0;
-                            if (isCollide(efire, tower)) {
-                                health -= edam;
-                                document.getElementById("health").value -= edam;
-                                hits++;
-                                if (hits === 10) {
-                                    hits = 0;
-                                    upgrade();
-                                }
-
-                            }
+                            firemovee = -650
+                          
                             efire.remove();
 
                         }
                     }
                 }
                 else {
-                    function eattack() {
                         efire = new Image(200, 200);
                         efire.src = "water.png";
                         efire.style.position = "absolute"
                         document.body.appendChild(efire);
                         function firem() {
-                            firemovee -= 10;
+                            firemovee += 10;
                             document.onmousemove = (e) => {
                                 fire.style.translate = e.clientX + "px 0px " + firemovee + "px";
                             }
-                            if (firemovee < -100) {
+                            if (firemovee < -100 && !wave) {
                                 requestAnimationFrame(firem);
                                 requestAnimationFrame(firem);
                             }
                             else {
-                                firemovee = 0;
-                                if (isCollide(fire, etower)) {
-                                    health -= dama;
-                                    document.getElementById("health").value -= dama;
-                                   
-                                }
-                                fire.remove();
+                                firemovee = -650;
+                               efire.remove(); 
                             }
                         }
                     }
-                }
             });
             socket.on("def", () => {
                 if (et1 === "fire") {
@@ -255,6 +239,7 @@
                                 e1health -= dam;
                                 document.getElementById("enemyhealth").value -= dam;
                                 hits++;
+                                socket.emit("damage", dam);
                                 if (hits === 10) {
                                     hits = 0;
                                     upgrade();
@@ -428,6 +413,7 @@
                             firemove = 0;
                             if (isCollide(fire, etower) && !invincible) {
                                 hits++;
+                                socket.emit("damage", dam);
                                 if (hits === 10) {
                                     hits = 0;
                                     upgrade();
@@ -463,6 +449,7 @@
                             e1health -= dama;
                             document.getElementById("enemyhealth").value -= dama;
                             hits++;
+                            socket.emit("damage", dam);
                             if (hits === 10) {
                                 hits = 0;
                                 upgrade();
@@ -473,6 +460,11 @@
                 }
                 requestAnimationFrame(firem);
             }
+            socket.on("dam", d=> {
+                if(!invincible){
+                    document.getElementById("health").value -= d;
+                }
+            })
             function attack2() {
                 fire = new Image(200, 200);
                 fire.src = "water.png";
@@ -492,6 +484,7 @@
                             e1health -= dama;
                             document.getElementById("enemyhealth").value -= dama;
                             hits++;
+                            socket.emit("damage", dam);
                             if (hits === 10) {
                                 hits = 0;
                                 upgrade();
