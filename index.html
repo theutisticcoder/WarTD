@@ -204,12 +204,14 @@
             });
             socket.on("def", (d) => {
                 if (et1 === "fire") {
+                    alert("The enemy has activated their firewall!");
                     invincible = true;
                     setTimeout(() => {
                         invincible = false
                     }, d)
                 }
                 else {
+                    alert("You got stunned!");
                     wave = true;
                     setTimeout(() => {
                         wave = false
