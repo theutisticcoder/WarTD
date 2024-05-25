@@ -16,7 +16,7 @@ io.on('connection', (socket) => {
         socket.emit("no");
     }
   })
-  socket.on("dam", (da)=> {
+  socket.on("damage", (da)=> {
     socket.to(Array.from(socket.rooms)[1].emit("dam", da));
   })
   socket.on("start", r=> {
