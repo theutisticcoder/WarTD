@@ -176,8 +176,8 @@
                         else {
                             firemovee = 0;
                             if (isCollide(efire, tower)) {
-                                e1health -= edam;
-                                document.getElementById("enemyhealth").value -= edam;
+                                health -= edam;
+                                document.getElementById("health").value -= edam;
                                 hits++;
                                 if (hits === 10) {
                                     hits = 0;
@@ -195,7 +195,7 @@
                         efire = new Image(200, 200);
                         efire.src = "water.png";
                         efire.style.position = "absolute"
-                        document.body.appendChild(fire);
+                        document.body.appendChild(efire);
                         function firem() {
                             firemovee -= 10;
                             document.onmousemove = (e) => {
@@ -208,13 +208,9 @@
                             else {
                                 firemovee = 0;
                                 if (isCollide(fire, etower)) {
-                                    e1health -= dama;
-                                    document.getElementById("enemyhealth").value -= dama;
-                                    hits++;
-                                    if (hits === 10) {
-                                        hits = 0;
-                                        upgrade();
-                                    }
+                                    health -= dama;
+                                    document.getElementById("health").value -= dama;
+                                   
                                 }
                                 fire.remove();
                             }
