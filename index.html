@@ -439,12 +439,12 @@
                     document.onmousemove = (e) => {
                         fire.style.translate = e.clientX + "px 0px " + watermove + "px";
                     }
-                    if (watermove > -650) {
+                    if (watermove > -650 && !wave) {
                         requestAnimationFrame(firem);
                     }
                     else {
                         watermove = 0;
-                        if (isCollide(fire, etower)) {
+                        if (isCollide(fire, etower) && !invincible) {
                             e1health -= dama;
                             document.getElementById("enemyhealth").value -= dama;
                             hits++;
@@ -474,12 +474,12 @@
                     document.onmousemove = (e) => {
                         fire.style.translate = e.clientX + "px 0px " + watermove + "px";
                     }
-                    if (watermove > -650) {
+                    if (watermove > -650 && !wave) {
                         requestAnimationFrame(firem);
                     }
                     else {
                         watermove = 0;
-                        if (isCollide(fire, etower)) {
+                        if (isCollide(fire, etower) && !invincible) {
                             e1health -= dama;
                             document.getElementById("enemyhealth").value -= dama;
                             hits++;
