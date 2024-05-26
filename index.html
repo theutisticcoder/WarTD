@@ -409,11 +409,9 @@
 
                                             }
                                         }
-                                        setTimeout(shoot, 10000, t1, 2);
                                     }
                                     else {
-                                        setTimeout(defend2, 10000, dur)
-                                        setTimeout(attack2, 20000)
+                                       
                                     }
                                 }
                                 else if (t1 === "water") {
@@ -461,11 +459,9 @@
 
                                             }
                                         }
-                                        setTimeout(defend2, 10000, dur);
-                                        setTimeout(attack2, 20000)
+                                       
                                     }
                                     else {
-                                        setTimeout(shoot2, 10000, t2, damage)
                                     }
                                 }
                             }
@@ -494,7 +490,7 @@
                         requestAnimationFrame(firem);
                     }
                 }
-                else if (document.activeElement === tower) {
+                else {
                     if (tow === "fire") {
                         fire = new Image(200, 200);
                         fire.src = "fire.png";
