@@ -103,9 +103,9 @@
     <progress id="health" max="100" value="100"></progress>
     <p id="cd">Cooldown</p>
     <progress id="cldwn" max="10" value="10"></progress>
-    <model-viewer id="home" src="newscene.glb"></model-viewer>
+    <model-viewer id="home" skybox-image="castle.png" src="newscene.glb"></model-viewer>
     <model-viewer id="enemy" src="newscene.glb"></model-viewer>
-    <model-viewer id="tower" class="tower" src="tower.glb"></model-viewer>
+    <model-viewer id="tower" class="tower" src="Fire.glb"></model-viewer>
     <model-viewer id="etower" class="tower" src="Fire.glb"></model-viewer>
     <script>
         const socket = io();
@@ -1107,7 +1107,7 @@
             alert("room not found.");
         })
         socket.on("taken", () => {
-            alert("room name taken, pleasse try again.")
+            alert("room name taken, please try again.")
         })
 
     </script>
