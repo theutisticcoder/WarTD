@@ -434,7 +434,7 @@
                                         document.onkeydown = (e) => {
                                             if (e.key === " " && able == true) {
                                                 cooldown();
-                                                shoot(t1, damage);
+                                                shoot(t1, dama);
                                                 socket.emit("fire")
                                                 setTimeout(() => {
                                                     able = true;
@@ -579,7 +579,7 @@
                                         document.onkeydown = (e) => {
                                             if (e.key === " " && able == true) {
                                                 cooldown();
-                                                shoot(t1, damage);
+                                                shoot(t1, dama);
                                                 socket.emit("fire")
                                                 setTimeout(() => {
                                                     able = true;
@@ -727,7 +727,7 @@
                                     document.onkeydown = (e) => {
                                         if (e.key === " " && able == true) {
                                             cooldown();
-                                            shoot(t1, damage);
+                                            shoot(t1, dama);
                                             socket.emit("fire")
                                             setTimeout(() => {
                                                 able = true;
@@ -870,7 +870,7 @@
                                     document.onkeydown = (e) => {
                                         if (e.key === " " && able == true) {
                                             cooldown();
-                                            shoot(t1, damage);
+                                            shoot(t1, dama);
                                             socket.emit("fire")
                                             setTimeout(() => {
                                                 able = true;
@@ -999,6 +999,16 @@
                             cooldown();
                             shoot(t1, dama);
                             socket.emit("fire")
+                        }
+                        else if (document.activeElement === tow2) {
+                            cooldown();
+                            attack();
+                            socket.emit("alt")
+                            socket.emit("fire")
+                            setTimeout(() => {
+                                able = true;
+                            }, timeoff);
+
                         }
                     }
                     if (e.key === "d" && able == true) {
