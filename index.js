@@ -19,6 +19,9 @@ io.on('connection', (socket) => {
   socket.on("damage", (da)=> {
     socket.to(Array.from(socket.rooms)[1]).emit("dam", da);
   })
+  socket.on("alt", ()=> {
+    socket.to(Array.from(socket.rooms)[1]).emit("alt");
+  })
   socket.on("start", r=> {
     if(rooms.includes(r)){
        
