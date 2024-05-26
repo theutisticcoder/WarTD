@@ -677,9 +677,7 @@
                                             cooldown();
                                             defend(time);
                                             socket.emit("defend", dur);
-                                            setTimeout(() => {
-                                                able = true;
-                                            }, timeoff);
+                                            
 
                                         }
                                         if (e.key === " " && able == true) {
@@ -687,26 +685,19 @@
                                             attack();
                                             socket.emit("fire")
 
-                                            setTimeout(() => {
-                                                able = true;
-                                            }, timeoff);
+                                            
 
                                         }
                                         if (e.key === "r" && able == true) {
                                             tower.ondrag = (e) => {
                                                 tower.style.left = e.clientX + "px";
                                             }
-                                            setTimeout(() => {
-                                                able = true;
-                                            }, timeoff);
+                                            
 
                                         }
                                     }
-                                    setTimeout(shoot, 10000, t1, 2);
                                 }
                                 else {
-                                    setTimeout(defend2, 10000, dur)
-                                    setTimeout(attack2, 20000)
                                 }
                             }
                             else if (t1 === "water") {
@@ -729,18 +720,14 @@
                                             cooldown();
                                             shoot(t1, dama);
                                             socket.emit("fire")
-                                            setTimeout(() => {
-                                                able = true;
-                                            }, timeoff);
+                                            
 
                                         }
                                         if (e.key === "d" && able == true) {
                                             socket.emit("defend", dur);
                                             cooldown();
                                             fdef();
-                                            setTimeout(() => {
-                                                able = true;
-                                            }, timeoff);
+                                            
 
                                         }
                                         if (e.key === "r" && able == true) {
@@ -748,17 +735,13 @@
                                             tower.ondrag = (e) => {
                                                 tower.style.left = e.clientX;
                                             }
-                                            setTimeout(() => {
-                                                able = true;
-                                            }, timeoff);
+                                            
 
                                         }
                                     }
-                                    setTimeout(defend2, 10000, dur);
-                                    setTimeout(attack2, 20000)
                                 }
                                 else {
-                                    setTimeout(shoot2, 10000, t2, damage)
+                                    
                                 }
                             }
                         }
@@ -820,9 +803,7 @@
                                             cooldown();
                                             defend(time);
                                             socket.emit("defend", dur);
-                                            setTimeout(() => {
-                                                able = true;
-                                            }, timeoff);
+                                            
 
                                         }
                                         if (e.key === " " && able == true) {
@@ -830,26 +811,20 @@
                                             attack();
                                             socket.emit("fire")
 
-                                            setTimeout(() => {
-                                                able = true;
-                                            }, timeoff);
+                                            
 
                                         }
                                         if (e.key === "r" && able == true) {
                                             tower.ondrag = (e) => {
                                                 tower.style.left = e.clientX + "px";
                                             }
-                                            setTimeout(() => {
-                                                able = true;
-                                            }, timeoff);
+                                            
 
                                         }
                                     }
                                     setTimeout(shoot, 10000, t1, 2);
                                 }
                                 else {
-                                    setTimeout(defend2, 10000, dur)
-                                    setTimeout(attack2, 20000)
                                 }
                             }
                             else if (t1 === "water") {
@@ -872,18 +847,14 @@
                                             cooldown();
                                             shoot(t1, dama);
                                             socket.emit("fire")
-                                            setTimeout(() => {
-                                                able = true;
-                                            }, timeoff);
+                                            
 
                                         }
                                         if (e.key === "d" && able == true) {
                                             socket.emit("defend", dur);
                                             cooldown();
                                             fdef();
-                                            setTimeout(() => {
-                                                able = true;
-                                            }, timeoff);
+                                            
 
                                         }
                                         if (e.key === "r" && able == true) {
@@ -891,9 +862,7 @@
                                             tower.ondrag = (e) => {
                                                 tower.style.left = e.clientX;
                                             }
-                                            setTimeout(() => {
-                                                able = true;
-                                            }, timeoff);
+                                            
 
                                         }
                                     }
@@ -1005,9 +974,6 @@
                             attack();
                             socket.emit("alt")
                             socket.emit("fire")
-                            setTimeout(() => {
-                                able = true;
-                            }, timeoff);
 
                         }
                     }
@@ -1016,18 +982,14 @@
                             cooldown();
                             socket.emit("defend", dur);
                             fdef();
-                            setTimeout(() => {
-                                able = true;
-                            }, timeoff);
+                          
                         }
                         else if (document.activeElement === tow2) {
                             cooldown();
                             socket.emit("alt")
                             socket.emit("defend", dur);
                             defend();
-                            setTimeout(() => {
-                                able = true;
-                            }, timeoff);
+                          
                         }
                     }
                     if (e.key === "r" && able == true) {
@@ -1056,26 +1018,20 @@
                             cooldown();
                             defend(dur);
                             socket.emit("defend", dur);
-                            setTimeout(() => {
-                                able = true;
-                            }, timeoff);
+                          
                         }
                         else if (document.activeElement === tower) {
                             cooldown();
                             defend(dur);
                             socket.emit("defend", dur);
-                            setTimeout(() => {
-                                able = true;
-                            }, timeoff);
+                          
                         }
                         else if (document.activeElement === tow2) {
                             cooldown();
                             fdef(dur);
                             socket.emit("alt");
                             socket.emit("defend", dur);
-                            setTimeout(() => {
-                                able = true;
-                            }, timeoff);
+                          
                         }
 
 
@@ -1085,9 +1041,7 @@
                             cooldown();
                             attack();
                             socket.emit("fire")
-                            setTimeout(() => {
-                                able = true;
-                            }, timeoff);
+                          
 
                         }
                         else if (document.activeElement === tow2) {
@@ -1095,9 +1049,7 @@
                             shoot("fire", dama);
                             socket.emit("alt")
                             socket.emit("fire")
-                            setTimeout(() => {
-                                able = true;
-                            }, timeoff);
+                          
 
                         }
                     }
