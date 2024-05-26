@@ -103,7 +103,7 @@
     <progress id="health" max="100" value="100"></progress>
     <p id="cd">Cooldown</p>
     <progress id="cldwn" max="10" value="10"></progress>
-    <model-viewer id="tower" skybox-image="castle.png" skybox-height="15m" skybox-width="15m" class="tower" src="Fire.glb"></model-viewer>
+    <model-viewer id="tower" skybox-image="castle.png" skybox-height="5m" skybox-width="5m" class="tower" src="Fire.glb"></model-viewer>
     <model-viewer id="etower" class="tower" src="Fire.glb"></model-viewer>
     <script>
         const socket = io();
@@ -136,7 +136,6 @@
         var e1health = 100;
         var etower = document.getElementById("etower");
         etower.style.position = "absolute";
-        etower.style.width = "50px";
         etower.style.height = "500px";
         etower.style.translate = "0px 0px -650px"
         etower.style.transformStyle = "preserve-3d"
