@@ -88,11 +88,16 @@
         }
 
         .tower {
-            scale: 3 3 3;
             position: absolute;
             transform-style: preserve-3d;
         }
-
+        #tower{
+        top 100px;
+        position: absolute;
+          scale: 3 3 3;
+          width: 100vw;
+          height: 100vh;
+        }
         button {
             font-size: 20pt;
         }
@@ -103,8 +108,8 @@
     <progress id="health" max="100" value="100"></progress>
     <p id="cd">Cooldown</p>
     <progress id="cldwn" max="10" value="10"></progress>
-    <model-viewer id="tower" skybox-image="castle.png" skybox-height="5m" skybox-width="5m" class="tower" src="Fire.glb"></model-viewer>
-    <model-viewer id="etower" class="tower" src="Fire.glb"></model-viewer>
+    <model-viewer camera-controls id="tower" max-camera-orbit="auto 90deg auto" skybox-image="castle.png" class="tower" src="opposite.glb"></model-viewer>
+
     <script>
         const socket = io();
         var firemove = 0;
@@ -115,10 +120,20 @@
         socket.on("recieve", (theme) => {
             et1 = theme;
             if (et1 === 'fire') {
-                etower.src = "Fire.glb";
+              if(t1 === 'water'){
+                tower.src = "opposite.glb";
+                }
+                else{
+                  tower.src = "fire.glb"
+                }
             }
             if (et1 === 'water') {
-                etower.src = "Water.glb";
+                if(t1 === 'water'){
+                  tower.src = "water.glb";
+                }
+                else{
+                  tower.src = "opposite.glb"
+                }
             }
         })
         var alt = false;
@@ -134,11 +149,7 @@
         tower.style.translate = "0px 0px -100px"
         tower.style.transformStyle = "preserve-3d"
         var e1health = 100;
-        var etower = document.getElementById("etower");
-        etower.style.position = "absolute";
-        etower.style.height = "500px";
-        etower.style.translate = "0px 0px -650px"
-        etower.style.transformStyle = "preserve-3d"
+       
         var options = ["fire", "water"];
         var back = false;
         var health = 100;
@@ -297,7 +308,7 @@
                         }
                         else {
                             firemove = 0;
-                            if (isCollide(fire, etower)) {
+
                                 e1health -= dam;
                                 document.getElementById("enemyhealth").value -= dam;
                                 hits++;
@@ -305,11 +316,11 @@
                                 if (hits === 10) {
                                     hits = 0;
                                     upgrade();
-                                }
+                    
 
-                            }
+
                             fire.remove();
-
+}
                         }
                     }
                     requestAnimationFrame(firem);
@@ -469,7 +480,7 @@
                             }
                             else {
                                 firemove = 0;
-                                if (isCollide(fire, etower) && !invincible) {
+                                if (!invincible) {
                                     hits++;
                                     socket.emit("damage", dama);
                                     if (hits === 10) {
@@ -614,7 +625,7 @@
                             }
                             else {
                                 firemove = 0;
-                                if (isCollide(fire, etower) && !invincible) {
+                                if (!invincible) {
                                     hits++;
                                     socket.emit("damage", dama);
                                     if (hits === 10) {
@@ -746,7 +757,7 @@
                         }
                         else {
                             watermove = 0;
-                            if (isCollide(fire, etower) && !invincible) {
+                            if (!invincible) {
                                 e1health -= dama;
                                 document.getElementById("enemyhealth").value -= dama;
                                 hits++;
@@ -875,7 +886,7 @@
                         }
                         else {
                             watermove = 0;
-                            if (isCollide(fire, etower) && !invincible) {
+                            if (!invincible) {
                                 e1health -= dama;
                                 document.getElementById("enemyhealth").value -= dama;
                                 hits++;
@@ -911,7 +922,7 @@
                     }
                     else {
                         watermove = 0;
-                        if (isCollide(fire, etower) && !invincible) {
+                        if (!invincible) {
                             e1health -= dama;
                             document.getElementById("enemyhealth").value -= dama;
                             hits++;
