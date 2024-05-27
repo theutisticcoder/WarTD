@@ -151,13 +151,13 @@
         tower.style.translate = "0px 0px 0px"
         tower.style.transformStyle = "preserve-3d"
         var e1health = 100;
+        var rotx = 0, roty = 0;
         tower.ondrag = (e)=> {
             if(fire != undefined){
-                fire.style.rotate = `${-e.clientY} ${e.clientX}`;
+                rotx = -e.clientY;
+                roty = e.clientX;
             }
-            if(efire != undefined){
-                efire.style.rotate = `${e.clientY} ${-e.clientX}`;
-            }
+            
         }
         var options = ["fire", "water"];
         var back = false;
@@ -188,6 +188,7 @@
                         document.body.appendChild(efire);
                         function firem() {
                             if (firemovee < -100 && !wave) {
+                                efire.style.rotate = -rotx + "deg " + -roty + "deg";
                                 efire.style.translate = "0px 0px " + firemovee + "px";
                                 firemovee += 10;
                                 requestAnimationFrame(firem);
@@ -207,6 +208,8 @@
                         function firem() {
 
                             if (firemovee < -100 && !wave) {
+                                efire.style.rotate = -rotx + "deg " + -roty + "deg";
+
                                 efire.style.translate = "0px 0px " + firemovee + "px";
                                 firemovee += 10;
                                 requestAnimationFrame(firem);
@@ -230,6 +233,8 @@
                         function firem() {
 
                             if (firemovee < -100 && !wave) {
+                                efire.style.rotate = -rotx + "deg " + -roty + "deg";
+
                                 efire.style.translate = "0px 0px " + firemovee + "px";
                                 firemovee += 10;
                                 requestAnimationFrame(firem);
@@ -250,6 +255,8 @@
                         document.body.appendChild(efire);
                         function firem() {
                             if (firemovee < -100 && !wave) {
+                                efire.style.rotate = -rotx + "deg " + -roty + "deg";
+
                                 efire.style.translate = "0px 0px " + firemovee + "px";
                                 firemovee += 10;
                                 requestAnimationFrame(firem);
@@ -310,6 +317,8 @@
                         exp += 10;
 
                         document.onmousemove = (e) => {
+                            fire.style.rotate = rotx + "deg " + roty + "deg";
+
                             fire.style.translate = e.clientX + "px 0px " + firemove + "px";
                         }
                         if (firemove > -650) {
@@ -481,6 +490,8 @@
                                 }
                             }
                             document.onmousemove = (e) => {
+                                fire.style.rotate = rotx + "deg " + roty + "deg";
+
                                 fire.style.translate = e.clientX + "px 0px " + firemove + "px";
                             }
                             if (firemove > -650 && !wave) {
@@ -626,6 +637,7 @@
                                 }
                             }
                             document.onmousemove = (e) => {
+                                fire.style.rotate = rotx + "deg " + roty + "deg";
                                 fire.style.translate = e.clientX + "px 0px " + firemove + "px";
                             }
                             if (firemove > -650 && !wave) {
@@ -758,6 +770,8 @@
                         }
 
                         document.onmousemove = (e) => {
+                            fire.style.rotate = rotx + "deg " + roty + "deg";
+
                             fire.style.translate = e.clientX + "px 0px " + watermove + "px";
                         }
                         if (watermove > -650 && !wave) {
@@ -887,6 +901,8 @@
                         }
 
                         document.onmousemove = (e) => {
+                            fire.style.rotate = rotx + "deg " + roty + "deg";
+
                             fire.style.translate = e.clientX + "px 0px " + watermove + "px";
                         }
                         if (watermove > -650 && !wave) {
@@ -923,6 +939,7 @@
                 function firem() {
                     watermove -= 10;
                     document.onmousemove = (e) => {
+                        fire.style.rotate = rotx + "deg " + roty + "deg";
                         fire.style.translate = e.clientX + "px 0px " + watermove + "px";
                     }
                     if (watermove > -650 && !wave) {
