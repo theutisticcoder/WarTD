@@ -115,14 +115,7 @@
         var firemovee = -650;
         var efire;
         var et1;
-        tower.ondrag = (e)=> {
-            if(fire != undefined){
-                fire.style.rotate = `${-e.clientY} ${e.clientX}`;
-            }
-            if(efire != undefined){
-                efire.style.rotate = `${e.clientY} ${-e.clientX}`;
-            }
-        }
+        
         socket.on("recieve", (theme) => {
             et1 = theme;
             if (et1 === 'fire') {
@@ -158,7 +151,14 @@
         tower.style.translate = "0px 0px 0px"
         tower.style.transformStyle = "preserve-3d"
         var e1health = 100;
-       
+        tower.ondrag = (e)=> {
+            if(fire != undefined){
+                fire.style.rotate = `${-e.clientY} ${e.clientX}`;
+            }
+            if(efire != undefined){
+                efire.style.rotate = `${e.clientY} ${-e.clientX}`;
+            }
+        }
         var options = ["fire", "water"];
         var back = false;
         var health = 100;
