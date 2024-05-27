@@ -122,17 +122,21 @@
             if (et1 === 'fire') {
               if(t1 === 'water'){
                 tower.src = "opposite.glb";
+                tower.orientation = "0deg 5deg 0deg"
                 }
                 else{
                   tower.src = "fire.glb"
+                  tower.orientation = "0deg 5deg 0deg"
                 }
             }
             if (et1 === 'water') {
                 if(t1 === 'water'){
                   tower.src = "water.glb";
-                }
+                  tower.orientation = "0deg 5deg 0deg"
+               }
                 else{
                   tower.src = "opposite.glb"
+                  tower.orientation = "0deg 95deg 0deg"
                 }
             }
         })
