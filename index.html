@@ -106,7 +106,7 @@
     <progress id="health" max="100" value="100"></progress>
     <p id="cd">Cooldown</p>
     <progress id="cldwn" max="10" value="10"></progress>
-    <model-viewer id="tower" skybox-image="castle.png" class="tower" src="opposite.glb"></model-viewer>
+    <model-viewer ar id="tower" camera-controls skybox-image="castle.png" class="tower" src="opposite.glb"></model-viewer>
 
     <script>
         const socket = io();
@@ -115,26 +115,34 @@
         var firemovee = -650;
         var efire;
         var et1;
+        document.ondrag = (e)=> {
+            if(fire != undefined){
+                fire.style.rotate = `${-e.clientY} ${e.clientX}`;
+            }
+            if(efire != undefined){
+                efire.style.rotate = `${-e.clientY} ${e.clientX}`;
+            }
+        }
         socket.on("recieve", (theme) => {
             et1 = theme;
             if (et1 === 'fire') {
               if(t1 === 'water'){
                 tower.src = "opposite.glb";
-                tower.style.rotate = "0deg 5deg 0deg"
+                tower.orientation = "0deg 0deg 10deg";
                 }
                 else{
                   tower.src = "fire.glb"
-                  tower.style.rotate = "0deg 5deg 0deg"
+                  tower.orientation = "0deg 0deg 10deg";
                 }
             }
             if (et1 === 'water') {
                 if(t1 === 'water'){
                   tower.src = "water.glb";
-                  tower.style.rotate = "0deg 5deg 0deg"
+                  tower.orientation = "0deg 0deg 10deg";
                }
                 else{
                   tower.src = "opposite.glb"
-                  tower.style.rotate = "0deg 95deg 0deg"
+                  tower.orientation = "0deg 0deg 190deg";
                 }
             }
         })
