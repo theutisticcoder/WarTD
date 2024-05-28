@@ -86,7 +86,7 @@
             top: 92vh;
             width: 100vw;
         }
-
+       
         .tower {
             position: absolute;
             transform-style: preserve-3d;
@@ -107,7 +107,6 @@
     <p id="cd">Cooldown</p>
     <progress id="cldwn" max="10" value="10"></progress>
     <model-viewer id="tower" skybox-image="castle.png" class="tower" src="opposite.glb"></model-viewer>
-
     <script>
         const socket = io();
         var firemove = 0;
@@ -684,6 +683,8 @@
                             if (t1 === "fire") {
                                 t2 = "water";
                                 tow2 = tower.cloneNode(true);
+                                tow2.setAttribute("skybox-image", "")
+
                                 tow2.style.position = "absolute";
                                 tow2.style.width = "50px";
                                 tow2.style.height = "500px";
@@ -730,6 +731,8 @@
                             else if (t1 === "water") {
                                 t2 = "fire";
                                 tow2 = tower.cloneNode(true);
+                                tow2.setAttribute("skybox-image", "")
+
                                 tow2.style.position = "absolute";
                                 tow2.style.width = "50px";
                                 tow2.style.height = "500px";
@@ -812,6 +815,8 @@
                             if (t1 === "fire") {
                                 t2 = "water";
                                 tow2 = tower.cloneNode(true);
+                                tow2.setAttribute("skybox-image", "")
+
                                 tow2.style.position = "absolute";
                                 tow2.style.width = "50px";
                                 tow2.style.height = "500px";
@@ -859,6 +864,8 @@
                             else if (t1 === "water") {
                                 t2 = "fire";
                                 tow2 = tower.cloneNode(true);
+                                tow2.setAttribute("skybox-image", "")
+
                                 tow2.style.position = "absolute";
                                 tow2.style.width = "50px";
                                 tow2.style.height = "500px";
