@@ -86,16 +86,18 @@
             top: 92vh;
             width: 100vw;
         }
-       
+
         .tower {
             position: absolute;
             transform-style: preserve-3d;
         }
-        #tower{
-        position: absolute;
-          width: 100vw;
-          height: 100vh;
+
+        #tower {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
         }
+
         button {
             font-size: 20pt;
         }
@@ -114,27 +116,27 @@
         var firemovee = -650;
         var efire;
         var et1;
-        
+
         socket.on("recieve", (theme) => {
             et1 = theme;
             if (et1 === 'fire') {
-              if(t1 === 'water'){
-                tower.src = "opposite.glb";
-                tower.orientation = "0deg 0deg 5deg";
+                if (t1 === 'water') {
+                    tower.src = "opposite.glb";
+                    tower.orientation = "0deg 0deg 5deg";
                 }
-                else{
-                  tower.src = "fire.glb"
-                  tower.orientation = "0deg 0deg 95deg";
+                else {
+                    tower.src = "fire.glb"
+                    tower.orientation = "0deg 0deg 95deg";
                 }
             }
             if (et1 === 'water') {
-                if(t1 === 'water'){
-                  tower.src = "water.glb";
-                  tower.orientation = "0deg 0deg 5deg";
-               }
-                else{
-                  tower.src = "opposite.glb"
-                  tower.orientation = "0deg 0deg 185deg";
+                if (t1 === 'water') {
+                    tower.src = "water.glb";
+                    tower.orientation = "0deg 0deg 5deg";
+                }
+                else {
+                    tower.src = "opposite.glb"
+                    tower.orientation = "0deg 0deg 185deg";
                 }
             }
         })
@@ -151,13 +153,30 @@
         tower.style.transformStyle = "preserve-3d"
         var e1health = 100;
         var rotx = 0, roty = 0;
-        tower.ondrag = (e)=> {
-            if(fire != undefined){
+        tower.ondrag = (e) => {
+            if (fire != undefined) {
                 rotx = -e.clientY;
                 roty = e.clientX;
             }
-            
+
         }
+        var etow2;
+        socket.on("tow2", t => {
+            alert("The enemy got a new tower!");
+            etow2 = tower.cloneNode(true);
+            etow2.setAttribute("skybox-image", "")
+            etow2.style.position = "absolute";
+            etow2.style.width = "50px";
+            etow2.style.height = "500px";
+            etow2.style.transformStyle = "preserve-3d"
+            if(t === "water"){
+                etow2.src = "Fire.glb";
+            }
+            if(t === "fire"){
+                etow2.src = "Water.glb";
+            }
+            document.body.appendChild(etow2);
+        })
         var options = ["fire", "water"];
         var back = false;
         var health = 100;
@@ -326,18 +345,18 @@
                         else {
                             firemove = 0;
 
-                                e1health -= dam;
-                                document.getElementById("enemyhealth").value -= dam;
-                                hits++;
-                                socket.emit("damage", dama);
-                                if (hits === 10) {
-                                    hits = 0;
-                                    upgrade();
-                    
+                            e1health -= dam;
+                            document.getElementById("enemyhealth").value -= dam;
+                            hits++;
+                            socket.emit("damage", dama);
+                            if (hits === 10) {
+                                hits = 0;
+                                upgrade();
 
 
-                            fire.remove();
-}
+
+                                fire.remove();
+                            }
                         }
                     }
                     requestAnimationFrame(firem);
@@ -391,7 +410,7 @@
                                     tow2.style.position = "absolute";
                                     tow2.style.width = "50px";
                                     tow2.style.height = "500px";
-                                    tow2.style.translate = "500px 0px -100px"
+                                    socket.emit("tower2", t2);
                                     tow2.style.transformStyle = "preserve-3d"
                                     tow2.src = "Water.glb";
                                     document.body.appendChild(tow2);
@@ -435,7 +454,7 @@
                                         }
                                     }
                                     else {
-                                       
+
                                     }
                                 }
                                 else if (t1 === "water") {
@@ -445,7 +464,7 @@
                                     tow2.style.position = "absolute";
                                     tow2.style.width = "50px";
                                     tow2.style.height = "500px";
-                                    tow2.style.translate = "500px 0px -100px"
+                                    socket.emit("tower2", t2);
                                     tow2.style.transformStyle = "preserve-3d"
                                     tow2.src = "Fire.glb";
                                     document.body.appendChild(tow2);
@@ -484,7 +503,7 @@
 
                                             }
                                         }
-                                       
+
                                     }
                                     else {
                                     }
@@ -536,7 +555,7 @@
                                     tow2.style.position = "absolute";
                                     tow2.style.width = "50px";
                                     tow2.style.height = "500px";
-                                    tow2.style.translate = "500px 0px -100px"
+                                    socket.emit("tower2", t2);
                                     tow2.style.transformStyle = "preserve-3d"
                                     tow2.src = "Water.glb";
                                     document.body.appendChild(tow2);
@@ -592,7 +611,7 @@
                                     tow2.style.position = "absolute";
                                     tow2.style.width = "50px";
                                     tow2.style.height = "500px";
-                                    tow2.style.translate = "500px 0px -100px"
+                                    socket.emit("tower2", t2);
                                     tow2.style.transformStyle = "preserve-3d"
                                     tow2.src = "Fire.glb";
                                     document.body.appendChild(tow2);
@@ -688,7 +707,7 @@
                                 tow2.style.position = "absolute";
                                 tow2.style.width = "50px";
                                 tow2.style.height = "500px";
-                                tow2.style.translate = "500px 0px -100px"
+                                socket.emit("tower2", t2);
                                 tow2.style.transformStyle = "preserve-3d"
                                 tow2.src = "Water.glb";
                                 document.body.appendChild(tow2);
@@ -705,7 +724,7 @@
                                             cooldown();
                                             defend(time);
                                             socket.emit("defend", dur);
-                                            
+
 
                                         }
                                         if (e.key === " " && able == true) {
@@ -713,14 +732,14 @@
                                             attack();
                                             socket.emit("fire")
 
-                                            
+
 
                                         }
                                         if (e.key === "r" && able == true) {
                                             tower.ondrag = (e) => {
                                                 tower.style.left = e.clientX + "px";
                                             }
-                                            
+
 
                                         }
                                     }
@@ -736,7 +755,7 @@
                                 tow2.style.position = "absolute";
                                 tow2.style.width = "50px";
                                 tow2.style.height = "500px";
-                                tow2.style.translate = "500px 0px -100px"
+                                socket.emit("tower2", t2);
                                 tow2.style.transformStyle = "preserve-3d"
                                 tow2.src = "Fire.glb";
                                 document.body.appendChild(tow2);
@@ -750,14 +769,14 @@
                                             cooldown();
                                             shoot(t1, dama);
                                             socket.emit("fire")
-                                            
+
 
                                         }
                                         if (e.key === "d" && able == true) {
                                             socket.emit("defend", dur);
                                             cooldown();
                                             fdef();
-                                            
+
 
                                         }
                                         if (e.key === "r" && able == true) {
@@ -765,13 +784,13 @@
                                             tower.ondrag = (e) => {
                                                 tower.style.left = e.clientX;
                                             }
-                                            
+
 
                                         }
                                     }
                                 }
                                 else {
-                                    
+
                                 }
                             }
                         }
@@ -820,7 +839,7 @@
                                 tow2.style.position = "absolute";
                                 tow2.style.width = "50px";
                                 tow2.style.height = "500px";
-                                tow2.style.translate = "500px 0px -100px"
+                                socket.emit("tower2", t2);
                                 tow2.style.transformStyle = "preserve-3d"
                                 tow2.src = "Water.glb";
                                 document.body.appendChild(tow2);
@@ -837,7 +856,7 @@
                                             cooldown();
                                             defend(time);
                                             socket.emit("defend", dur);
-                                            
+
 
                                         }
                                         if (e.key === " " && able == true) {
@@ -845,14 +864,14 @@
                                             attack();
                                             socket.emit("fire")
 
-                                            
+
 
                                         }
                                         if (e.key === "r" && able == true) {
                                             tower.ondrag = (e) => {
                                                 tower.style.left = e.clientX + "px";
                                             }
-                                            
+
 
                                         }
                                     }
@@ -869,7 +888,7 @@
                                 tow2.style.position = "absolute";
                                 tow2.style.width = "50px";
                                 tow2.style.height = "500px";
-                                tow2.style.translate = "500px 0px -100px"
+                                socket.emit("tower2", t2);
                                 tow2.style.transformStyle = "preserve-3d"
                                 tow2.src = "Fire.glb";
                                 document.body.appendChild(tow2);
@@ -883,14 +902,14 @@
                                             cooldown();
                                             shoot(t1, dama);
                                             socket.emit("fire")
-                                            
+
 
                                         }
                                         if (e.key === "d" && able == true) {
                                             socket.emit("defend", dur);
                                             cooldown();
                                             fdef();
-                                            
+
 
                                         }
                                         if (e.key === "r" && able == true) {
@@ -898,7 +917,7 @@
                                             tower.ondrag = (e) => {
                                                 tower.style.left = e.clientX;
                                             }
-                                            
+
 
                                         }
                                     }
@@ -1021,14 +1040,14 @@
                             cooldown();
                             socket.emit("defend", dur);
                             fdef();
-                          
+
                         }
                         else if (document.activeElement === tow2) {
                             cooldown();
                             socket.emit("alt")
                             socket.emit("defend", dur);
                             defend();
-                          
+
                         }
                     }
                     if (e.key === "r" && able == true) {
@@ -1057,20 +1076,20 @@
                             cooldown();
                             defend(dur);
                             socket.emit("defend", dur);
-                          
+
                         }
                         else if (document.activeElement === tower) {
                             cooldown();
                             defend(dur);
                             socket.emit("defend", dur);
-                          
+
                         }
                         else if (document.activeElement === tow2) {
                             cooldown();
                             fdef(dur);
                             socket.emit("alt");
                             socket.emit("defend", dur);
-                          
+
                         }
 
 
@@ -1080,7 +1099,7 @@
                             cooldown();
                             attack();
                             socket.emit("fire")
-                          
+
 
                         }
                         else if (document.activeElement === tow2) {
@@ -1088,7 +1107,7 @@
                             shoot("fire", dama);
                             socket.emit("alt")
                             socket.emit("fire")
-                          
+
 
                         }
                     }
