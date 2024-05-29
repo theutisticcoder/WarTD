@@ -23,7 +23,7 @@ io.on('connection', (socket) => {
     socket.to(Array.from(socket.rooms)[1]).emit("alt");
   })
   socket.on("tower2", t=>{
-    socket.to(Array.from(socket.rooms)[0]).emit("tow2", t);
+    socket.to(Array.from(socket.rooms)[1]).emit("tow2", t);
   })
   socket.on("start", r=> {
     if(rooms.includes(r)){
