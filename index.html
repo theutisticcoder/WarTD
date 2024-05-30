@@ -436,7 +436,7 @@
                                             }
                                             if (e.key === " " && able == true) {
                                                 cooldown();
-                                                attack();
+                                                attack2();
                                                 socket.emit("fire")
 
                                                 setTimeout(() => {
@@ -583,7 +583,7 @@
                                             }
                                             if (e.key === " " && able == true) {
                                                 cooldown();
-                                                attack();
+                                                attack2();
                                                 socket.emit("fire")
 
                                                 setTimeout(() => {
@@ -734,7 +734,7 @@
                                         }
                                         if (e.key === " " && able == true) {
                                             cooldown();
-                                            attack();
+                                            attack2();
                                             socket.emit("fire")
 
 
@@ -866,7 +866,7 @@
                                         }
                                         if (e.key === " " && able == true) {
                                             cooldown();
-                                            attack();
+                                            attack2();
                                             socket.emit("fire")
 
 
@@ -1034,7 +1034,7 @@
                         }
                         else if (document.activeElement === tow2) {
                             cooldown();
-                            attack();
+                            attack2();
                             socket.emit("alt")
                             socket.emit("fire")
 
