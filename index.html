@@ -170,10 +170,10 @@
             etow2.style.width = "50px";
             etow2.style.height = "500px";
             etow2.style.transformStyle = "preserve-3d"
-            if(t === "water"){
+            if (t === "water") {
                 etow2.src = "Water.glb";
             }
-            if(t === "fire"){
+            if (t === "fire") {
                 etow2.src = "Fire.glb";
             }
             document.body.appendChild(etow2);
@@ -325,6 +325,7 @@
                 }
             })
             var fire;
+            var castle = false;
             function shoot2(tow, dam) {
                 if (tow === "fire") {
                     fire = new Image(200, 200);
@@ -348,6 +349,19 @@
 
                             e1health -= dam;
                             document.getElementById("enemyhealth").value -= dam;
+                            if (document.getElementById("enemyhealth").value <= 0) {
+                                if (castle) {
+                                    document.getElementById("tower").src = t1 + ".glb"
+                                    alert("You Won!");
+                                    socket.emit("over");
+                                    document.onkeydown = null;
+                                }
+                                socket.emit("remove");
+                                alert("Aim for the castle to finish them off.");
+                                castle = true;
+                                document.getElementById("enemyhealth").value = 100;
+
+                            }
                             hits++;
                             socket.emit("damage", dama);
                             if (hits === 10) {
@@ -531,7 +545,19 @@
                                     }
                                     e1health -= dam;
                                     document.getElementById("enemyhealth").value -= dam;
+                                    if (document.getElementById("enemyhealth").value <= 0) {
+                                        if (castle) {
+                                            document.getElementById("tower").src = t1 + ".glb"
+                                            alert("You Won!");
+                                            socket.emit("over");
+                                            document.onkeydown = null;
+                                        }
+                                        socket.emit("remove");
+                                        alert("Aim for the castle to finish them off.");
+                                        castle = true;
+                                        document.getElementById("enemyhealth").value = 100;
 
+                                    }
                                 }
                                 fire.remove();
                             }
@@ -681,7 +707,19 @@
                                     }
                                     e1health -= dam;
                                     document.getElementById("enemyhealth").value -= dam;
+                                    if (document.getElementById("enemyhealth").value <= 0) {
+                                        if (castle) {
+                                            document.getElementById("tower").src = t1 + ".glb"
+                                            alert("You Won!");
+                                            socket.emit("over");
+                                            document.onkeydown = null;
+                                        }
+                                        socket.emit("remove");
+                                        alert("Aim for the castle to finish them off.");
+                                        castle = true;
+                                        document.getElementById("enemyhealth").value = 100;
 
+                                    }
                                 }
                                 fire.remove();
                             }
@@ -813,6 +851,19 @@
                             if (!invincible) {
                                 e1health -= dama;
                                 document.getElementById("enemyhealth").value -= dama;
+                                if (document.getElementById("enemyhealth").value <= 0) {
+                                    if (castle) {
+                                        document.getElementById("tower").src = t1 + ".glb"
+                                        alert("You Won!");
+                                        socket.emit("over");
+                                        document.onkeydown = null;
+                                    }
+                                    socket.emit("remove");
+                                    alert("Aim for the castle to finish them off.");
+                                    castle = true;
+                                    document.getElementById("enemyhealth").value = 100;
+
+                                }
                                 hits++;
                                 socket.emit("damage", dama);
                                 if (hits === 10) {
@@ -948,6 +999,19 @@
                             if (!invincible) {
                                 e1health -= dama;
                                 document.getElementById("enemyhealth").value -= dama;
+                                if (document.getElementById("enemyhealth").value <= 0) {
+                                    if (castle) {
+                                        document.getElementById("tower").src = t1 + ".glb"
+                                        alert("You Won!");
+                                        socket.emit("over");
+                                        document.onkeydown = null;
+                                    }
+                                    socket.emit("remove");
+                                    alert("Aim for the castle to finish them off.");
+                                    castle = true;
+                                    document.getElementById("enemyhealth").value = 100;
+
+                                }
                                 hits++;
                                 socket.emit("damage", dama);
                                 if (hits === 10) {
@@ -985,6 +1049,19 @@
                         if (!invincible) {
                             e1health -= dama;
                             document.getElementById("enemyhealth").value -= dama;
+                            if (document.getElementById("enemyhealth").value <= 0) {
+                                if (castle) {
+                                    document.getElementById("tower").src = t1 + ".glb"
+                                    alert("You Won!");
+                                    socket.emit("over");
+                                    document.onkeydown = null;
+                                }
+                                socket.emit("remove");
+                                alert("Aim for the castle to finish them off.");
+                                castle = true;
+                                document.getElementById("enemyhealth").value = 100;
+
+                            }
                             hits++;
                             socket.emit("damage", dama);
                             if (hits === 10) {
@@ -1153,6 +1230,26 @@
                 }
 
             }
+            socket.on("over", () => {
+                alert("Game Over.");
+            })
+            socket.on("remove", () => {
+
+                if (tow2 != undefined) {
+                    tow2.remove();
+                    document.getElementById("health").value = 100;
+                }
+                else {
+                    document.onkeydown = null;
+                    document.getElementById("health").value = 100;
+                    if (et1 === "fire") {
+                        document.getElementById("tower").src = "fire.glb";
+                    }
+                    else if (et1 === "water") {
+                        document.getElementById("tower").src = "water.glb";
+                    }
+                }
+            })
             socket.emit("et1", t1);
         }
     </script>

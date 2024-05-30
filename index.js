@@ -8,6 +8,12 @@ const io = new Server(server);
 app.use(express.static(__dirname));
 io.on('connection', (socket) => {
   socket.on("join", r=> {
+    socket.on("remove", ()=> {
+      socket.to(Array.from(socket.rooms)[1]).emit("remove");
+    })
+    socket.on("over", ()=> {
+      socket.to(Array.from(socket.rooms)[1]).emit("over");
+    })
     if(rooms.includes(r)){
         socket.join(r);
         io.to(r).emit("opengame");
