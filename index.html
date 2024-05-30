@@ -547,13 +547,13 @@
                                     document.getElementById("enemyhealth").value -= dam;
                                     if (document.getElementById("enemyhealth").value <= 0) {
                                         if (castle) {
-                                            document.getElementById("tower").src = t1 + ".glb"
-                                            alert("You Won!");
+                                                alert("You Won!");
                                             socket.emit("over");
                                             document.onkeydown = null;
                                         }
                                         socket.emit("remove");
-                                        alert("Aim for the castle to finish them off.");
+                                            document.getElementById("tower").src = t1 + ".glb"
+                                    alert("Aim for the castle to finish them off.");
                                         castle = true;
                                         document.getElementById("enemyhealth").value = 100;
 
@@ -709,13 +709,13 @@
                                     document.getElementById("enemyhealth").value -= dam;
                                     if (document.getElementById("enemyhealth").value <= 0) {
                                         if (castle) {
-                                            document.getElementById("tower").src = t1 + ".glb"
-                                            alert("You Won!");
+                                                alert("You Won!");
                                             socket.emit("over");
                                             document.onkeydown = null;
                                         }
                                         socket.emit("remove");
-                                        alert("Aim for the castle to finish them off.");
+                                            document.getElementById("tower").src = t1 + ".glb"
+                                    alert("Aim for the castle to finish them off.");
                                         castle = true;
                                         document.getElementById("enemyhealth").value = 100;
 
@@ -853,12 +853,12 @@
                                 document.getElementById("enemyhealth").value -= dama;
                                 if (document.getElementById("enemyhealth").value <= 0) {
                                     if (castle) {
-                                        document.getElementById("tower").src = t1 + ".glb"
                                         alert("You Won!");
                                         socket.emit("over");
                                         document.onkeydown = null;
                                     }
                                     socket.emit("remove");
+                                        document.getElementById("tower").src = t1 + ".glb"
                                     alert("Aim for the castle to finish them off.");
                                     castle = true;
                                     document.getElementById("enemyhealth").value = 100;
@@ -1001,12 +1001,12 @@
                                 document.getElementById("enemyhealth").value -= dama;
                                 if (document.getElementById("enemyhealth").value <= 0) {
                                     if (castle) {
-                                        document.getElementById("tower").src = t1 + ".glb"
                                         alert("You Won!");
                                         socket.emit("over");
                                         document.onkeydown = null;
                                     }
                                     socket.emit("remove");
+                                        document.getElementById("tower").src = t1 + ".glb"
                                     alert("Aim for the castle to finish them off.");
                                     castle = true;
                                     document.getElementById("enemyhealth").value = 100;
