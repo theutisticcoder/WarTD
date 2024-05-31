@@ -351,17 +351,23 @@
                             document.getElementById("enemyhealth").value -= dam;
                             if (document.getElementById("enemyhealth").value <= 0) {
                                 if (castle) {
-                                    document.getElementById("tower").src = t1 + ".glb"
                                     alert("You Won!");
                                     socket.emit("over");
                                     document.onkeydown = null;
                                 }
-                                socket.emit("remove");
+                                else {socket.emit("remove");
+                                if(t1=== "water"){
+                                    tower.src = "Water.glb"
+                                }
+                                else if(t1=== "fire"){
+                                    tower.src = "Fire.glb";
+                                }
+
                                 alert("Aim for the castle to finish them off.");
                                 castle = true;
                                 document.getElementById("enemyhealth").value = 100;
 
-                            }
+}                            }
                             hits++;
                             socket.emit("damage", dama);
                             if (hits === 10) {
@@ -551,12 +557,12 @@
                                             socket.emit("over");
                                             document.onkeydown = null;
                                         }
-                                        socket.emit("remove");
-                                            document.getElementById("tower").src = t1 + ".glb"
-                                    alert("Aim for the castle to finish them off.");
+                                        else {socket.emit("remove");
+                                                                            document.getElementById("tower").src= t1 + ".glb"
+                                            alert("Aim for the castle to finish them off.");
                                         castle = true;
                                         document.getElementById("enemyhealth").value = 100;
-
+}
                                     }
                                 }
                                 fire.remove();
@@ -713,12 +719,16 @@
                                             socket.emit("over");
                                             document.onkeydown = null;
                                         }
-                                        socket.emit("remove");
-                                            document.getElementById("tower").src = t1 + ".glb"
-                                    alert("Aim for the castle to finish them off.");
+                                        else {socket.emit("remove");
+                                        if(t1=== "water"){
+                                    tower.src = "Water.glb"
+                                }
+                                else if(t1=== "fire"){
+                                    tower.src = "Fire.glb";
+                                }                                            alert("Aim for the castle to finish them off.");
                                         castle = true;
                                         document.getElementById("enemyhealth").value = 100;
-
+}
                                     }
                                 }
                                 fire.remove();
@@ -857,12 +867,16 @@
                                         socket.emit("over");
                                         document.onkeydown = null;
                                     }
-                                    socket.emit("remove");
-                                        document.getElementById("tower").src = t1 + ".glb"
-                                    alert("Aim for the castle to finish them off.");
+                                    else {socket.emit("remove");
+                                    if(t1=== "water"){
+                                    tower.src = "Water.glb"
+                                }
+                                else if(t1=== "fire"){
+                                    tower.src = "Fire.glb";
+                                }                                        alert("Aim for the castle to finish them off.");
                                     castle = true;
                                     document.getElementById("enemyhealth").value = 100;
-
+}
                                 }
                                 hits++;
                                 socket.emit("damage", dama);
@@ -1005,12 +1019,16 @@
                                         socket.emit("over");
                                         document.onkeydown = null;
                                     }
-                                    socket.emit("remove");
-                                        document.getElementById("tower").src = t1 + ".glb"
-                                    alert("Aim for the castle to finish them off.");
+                                    else {socket.emit("remove");
+                                    if(t1=== "water"){
+                                    tower.src = "Water.glb"
+                                }
+                                else if(t1=== "fire"){
+                                    tower.src = "Fire.glb";
+                                }                                        alert("Aim for the castle to finish them off.");
                                     castle = true;
                                     document.getElementById("enemyhealth").value = 100;
-
+}
                                 }
                                 hits++;
                                 socket.emit("damage", dama);
@@ -1051,17 +1069,21 @@
                             document.getElementById("enemyhealth").value -= dama;
                             if (document.getElementById("enemyhealth").value <= 0) {
                                 if (castle) {
-                                    document.getElementById("tower").src = t1 + ".glb"
                                     alert("You Won!");
                                     socket.emit("over");
                                     document.onkeydown = null;
                                 }
-                                socket.emit("remove");
-                                alert("Aim for the castle to finish them off.");
+                                else {socket.emit("remove");
+                                if(t1=== "water"){
+                                    tower.src = "Water.glb"
+                                }
+                                else if(t1=== "fire"){
+                                    tower.src = "Fire.glb";
+                                }                                alert("Aim for the castle to finish them off.");
                                 castle = true;
                                 document.getElementById("enemyhealth").value = 100;
 
-                            }
+}                            }
                             hits++;
                             socket.emit("damage", dama);
                             if (hits === 10) {
